@@ -27,6 +27,7 @@ public class BitcoinIndex extends AppCompatActivity implements OnTaskCompleted {
     protected void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
+            setTitle("Vertex Tracker");
             //Remove title bar
             this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 

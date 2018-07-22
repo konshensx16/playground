@@ -3,6 +3,7 @@ package com.example.konshensx.firstapp;
 import android.content.ContentProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -57,12 +58,20 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
 //        myViewHolder.background_img.setImageResource(mData.get(i).getBackground());
         myViewHolder.symbol.setText(mData.get(i).getSymbol());
         myViewHolder.name.setText(mData.get(i).getName());
+        // TODO: this needs to be formatted and displayed with the currency
+        myViewHolder.price.setText(String.format("%,f $", mData.get(i).getQuotes().getPrice()));
+        if (mData.get(i).getQuotes().getPercentChange1H() > 0)
+        {
+            myViewHolder.change.setTextColor(Color.parseColor("#3AD084"));
+        } else {
+            myViewHolder.change.setTextColor(Color.parseColor("#F8748A"));
+        }
+        myViewHolder.change.setText(String.format("%,.2f %%", mData.get(i).getQuotes().getPercentChange1H()));
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked");
-                Toast.makeText(myContext, mData.get(i).getName(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(myContext, CurrencyDetails.class);
                 int id = mData.get(i).getId();
                 intent.putExtra(EXTRA_MESSAGE, id);
@@ -91,12 +100,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
         ImageView background_img;
         TextView  symbol;
         TextView name;
+        TextView price;
+        TextView change;
 
         public myViewHolder(View itemView) {
             super(itemView);
             background_img = itemView.findViewById(R.id.background_img);
             symbol = itemView.findViewById(R.id.symbol);
             name = itemView.findViewById(R.id.name);
+            price = itemView.findViewById(R.id.price);
+            change = itemView.findViewById(R.id.change);
         }
     }
 
