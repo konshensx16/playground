@@ -52,10 +52,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
      */
     @Override
     public void onBindViewHolder(@NonNull myViewHolder myViewHolder, final int i) {
-
-//        myViewHolder.background_img.setImageResource(mData.get(i).getBackground());
-//        myViewHolder.tv_title.setText(mData.get(i).getUsername());
-//        myViewHolder.background_img.setImageResource(mData.get(i).getBackground());
         myViewHolder.symbol.setText(mData.get(i).getSymbol());
         myViewHolder.name.setText(mData.get(i).getName());
         // TODO: this needs to be formatted and displayed with the currency

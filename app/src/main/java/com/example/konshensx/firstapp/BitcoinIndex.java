@@ -3,6 +3,7 @@ package com.example.konshensx.firstapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.ListMenuItemView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,6 +24,16 @@ public class BitcoinIndex extends AppCompatActivity implements OnTaskCompleted {
     public static final String EXTRA_MESSAGE = "com.example.konshensx.firstapp.MESSAGE";
     private String jsonResponse;
     private List<Currency> list;
+    RecyclerView recyclerView;
+    Adapter adapter;
+    LinearLayoutManager linearLayoutManager;
+
+    // the number of currencies to get in each request
+    final int LIMIT = 10;
+    // the number from where the next data should start
+    // starting from 10 because the first set of data is loaded when the onCreate function is executed
+    private int START_INDEX = 10;
+    private EndlessRecyclerViewScrollListener scrollListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
@@ -32,25 +43,19 @@ public class BitcoinIndex extends AppCompatActivity implements OnTaskCompleted {
             this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
             //Remove notification bar
-            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//            getWindow().getDecorView().setSystemUiVisibility(
-//                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//            );
+//            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
             setContentView(R.layout.activity_bicoin_index);
 
-            // should make the title bar transparent
-            // using thread instead of AsyncTask which is a pain in the ass
-            // fetch the json result from within a thread
-
-
-            // get rid of the status bar on top (title bar of the activity)
-
             Window window = getWindow();
-
-            window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            linearLayoutManager = new LinearLayoutManager(this);
+//            window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
             this.list = new ArrayList<>();
-            new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?limit=20");
+            new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank");
+
+            adapter = new Adapter(this, this.list);
+
 
         }
         catch (Exception e)
@@ -113,12 +118,45 @@ public class BitcoinIndex extends AppCompatActivity implements OnTaskCompleted {
             e.printStackTrace();
         }
         // Add the items to the list here instead of the onCreate method
-
-//        this.myList = new ArrayList<>();
-        Adapter adapter = new Adapter(this, this.list);
-        RecyclerView recyclerView = findViewById(R.id.rv_list);
+        recyclerView = findViewById(R.id.rv_list);
         // setting the adapter to the recyclerView created
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // triggered only when new data needs to be appended to the list
+                // append new fetched data to the bottom of the list
+                List<Currency> newList = loadNextSetOfDataFromAPI();
+                list.addAll(newList);
+                // notify the adapter of the changes so that it updates the recyclerView
+                view.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyItemChanged(list.size() - 1);
+                    }
+                });
+            }
+        };
+        recyclerView.addOnScrollListener(scrollListener);
+    }
+
+    /**
+     * returns the next set of data
+     * @return
+     */
+    private List<Currency> loadNextSetOfDataFromAPI() {
+        List<Currency> list = new ArrayList<>();
+        // get the next set of data
+        // the limit could be a const so it's better to defined at the top
+        new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?start="+ START_INDEX +"&limit=" + LIMIT + "&sort=rank");
+        // INC the value of start by the LIMIT
+        this.START_INDEX += LIMIT;
+        // adding just dummy data for new, later this needs to send a request to the end point and deserialize the data
+//        Quotes quotes = new Quotes(100, new BigDecimal(12), new BigDecimal(12), 12, 12, 12);
+//        list.add(new Currency(33, "konshensx", "X", "slougi", 12, 12, 12, 12, quotes));
+
+        return list;
     }
 }
