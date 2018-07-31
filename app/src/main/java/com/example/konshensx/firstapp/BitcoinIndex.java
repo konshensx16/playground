@@ -1,17 +1,17 @@
 package com.example.konshensx.firstapp;
 
-import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.ListMenuItemView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
+import android.view.MenuItem;
 import android.view.Window;
-import android.view.WindowManager;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,6 +27,9 @@ public class BitcoinIndex extends AppCompatActivity implements OnTaskCompleted {
     RecyclerView recyclerView;
     Adapter adapter;
     LinearLayoutManager linearLayoutManager;
+    BottomNavigationView navigation;
+    ActionBar toolbar;
+
 
     // the number of currencies to get in each request
     final int LIMIT = 10;
@@ -41,11 +44,18 @@ public class BitcoinIndex extends AppCompatActivity implements OnTaskCompleted {
             setTitle("Vertex Tracker");
             //Remove title bar
             this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
+            setContentView(R.layout.activity_bitcoin_index);
+            // get the tools bar to set the name later based on the page im in
+            toolbar = getSupportActionBar();
             //Remove notification bar
 //            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            // NEED TO LOAD THE FRAGMENT BEFORE CALLING THE RV_LIST, OTHER WISE THE RV_LIST IS NOT AVAILABLE YET
+            loadFragment(new HomeFragment());
+            // TODO: need to love this to the home fragment (maybe)
+            recyclerView = findViewById(R.id.rv_list);
+            navigation = findViewById(R.id.navigation);
+            navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-            setContentView(R.layout.activity_bicoin_index);
 
             Window window = getWindow();
             linearLayoutManager = new LinearLayoutManager(this);
@@ -63,6 +73,40 @@ public class BitcoinIndex extends AppCompatActivity implements OnTaskCompleted {
             e.printStackTrace();
         }
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment fragment;
+            switch (item.getItemId()) {
+                case R.id.home:
+                    toolbar.setTitle("Vertex Tracker");
+                    fragment = new HomeFragment();
+                    loadFragment(fragment);
+                    return true;
+                case R.id.search:
+                    toolbar.setTitle("Search for currencies");
+                    fragment = new SearchFragment();
+                    loadFragment(fragment);
+                    return true;
+                case R.id.settings:
+                    toolbar.setTitle("Settings");
+                    fragment = new SettingFragment();
+                    loadFragment(fragment);
+                    return true;
+            }
+            return false;
+        }
+    };
+
+    private void loadFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 
     /**
      * This method might be useless now that the coed is all moved to the Fetcher class
@@ -118,7 +162,6 @@ public class BitcoinIndex extends AppCompatActivity implements OnTaskCompleted {
             e.printStackTrace();
         }
         // Add the items to the list here instead of the onCreate method
-        recyclerView = findViewById(R.id.rv_list);
         // setting the adapter to the recyclerView created
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);
