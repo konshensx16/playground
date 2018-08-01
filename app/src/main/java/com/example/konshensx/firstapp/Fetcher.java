@@ -1,5 +1,6 @@
 package com.example.konshensx.firstapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,17 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Fetcher extends AsyncTask<String, Void, String>{
-    // XXX moved these instance properties from the activity to here
-    // testing the onpostexecute function to handle updating the UI with the necessary data
-    private Context context;
 
     private OnTaskCompleted listener;
     private String jsonResponse;
 
     public Fetcher() { }
 
-    public Fetcher(Context listener) {
-        this.listener = (OnTaskCompleted) listener;
+    public Fetcher(OnTaskCompleted listener) {
+        this.listener = listener;
     }
 
     public void fetchJson(String link) {
@@ -72,19 +70,6 @@ public class Fetcher extends AsyncTask<String, Void, String>{
             }
             //Here is your json in string format
             responseJSON = response.toString();
-            // XXX shoudl the fetch function return the jsonString or the string parsed
-//            try {
-//                JSONObject jsonObject = new JSONObject(responseJSON);
-//                JSONArray jsonArray = jsonObject.getJSONArray("data");
-//
-//                for (int i = 0; i < jsonArray.length(); i++) {
-//                    JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-//                }
-//            } catch (JSONException e)
-//            {
-//                e.printStackTrace();
-//            }
-
         }
         this.jsonResponse = responseJSON;
     }

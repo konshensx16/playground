@@ -13,7 +13,7 @@ import android.view.Window;
 
 
 public class BitcoinIndex extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "com.example.konshensx.firstapp.MESSAGE";
+//    public static final String EXTRA_MESSAGE = "com.example.konshensx.firstapp.MESSAGE";
 
     BottomNavigationView navigation;
     ActionBar toolbar;
@@ -38,7 +38,7 @@ public class BitcoinIndex extends AppCompatActivity {
             CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
             layoutParams.setBehavior(new BottomNavigationBehavior());
 
-            loadFragment(new SearchFragment());
+            loadFragment(new HomeFragment());
 
         }
         catch (Exception e)
@@ -53,6 +53,10 @@ public class BitcoinIndex extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
             switch (item.getItemId()) {
+                case R.id.home:
+                    fragment = new HomeFragment();
+                    loadFragment(fragment);
+                    return true;
                 case R.id.search:
 //                    toolbar.setTitle("Search for currencies");
                     fragment = new SearchFragment();
