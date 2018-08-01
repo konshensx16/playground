@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
@@ -8,10 +8,18 @@
     tools:context=".BitcoinIndex"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="141dp"
+        android:layout_height="145dp"
+        android:text="Vertex Tracker"
+        android:textSize="30sp"
+        android:textColor="@android:color/white" />
+
     <FrameLayout
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/black"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.BottomNavigationView
@@ -26,4 +34,4 @@
         app:itemTextColor="@android:color/white"
         app:menu="@menu/navigation" />
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

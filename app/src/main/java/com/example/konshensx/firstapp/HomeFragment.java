@@ -8,12 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class HomeFragment extends Fragment {
-    @Override
+/**
+ * This class will have a recyclerView and a bunch of listeners for different behaviours
+ */
+public class HomeFragment extends Fragment{
+
     @Nullable
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // might need to change this ?
-        return inflater.inflate(R.layout.home_fragment, container);
+        return inflater.inflate(R.layout.home_layout, container, false);
     }
 
 }
