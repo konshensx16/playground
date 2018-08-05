@@ -2,4 +2,6 @@
     <string name="app_name">FirstApp</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
+    <string name="currency_search_input">Search for currencies…</string>
+    <string name="currency_recent_search">Recent searches</string>
 </resources>

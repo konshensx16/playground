@@ -3,16 +3,42 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
 
-        <TextView
-            android:layout_width="match_parent"
+
+        <LinearLayout
             android:layout_height="match_parent"
-            android:textSize="50sp"
-            android:text="Search Fragment"
-            android:background="@android:color/black"
-            android:textColor="@android:color/white"/>
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:ems="10"
+                android:padding="10dp"
+                android:inputType="textPersonName"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:hint="@string/currency_search_input" />
 
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textSize="25sp"
+                android:padding="16dp"
+                android:text="@string/currency_recent_search"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:layout_height="500dp"
+                android:layout_width="match_parent"
+                android:text="Result Will be shown here"
+                android:background="@color/colorPrimary"/>
+
+
+        </LinearLayout>
     </FrameLayout>
 </LinearLayout>
