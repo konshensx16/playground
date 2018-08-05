@@ -89,7 +89,6 @@ public class Fetcher extends AsyncTask<String, Void, String>{
         return this.jsonResponse;
     }
 
-    // TODO: change the signature to include the status code and send it to the HomeFragment and display it in a Toast
     protected void onPostExecute(String result) {
         listener.onTaskCompleted(this.jsonResponse, this.statusCode);
     }

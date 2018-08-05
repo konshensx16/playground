@@ -53,7 +53,6 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
      */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        // TODO: move this code to the onCreatedView and see if it's going to make any difference
         // trying to see if this is what's causing the slow starting of the fragment and the 429 status code (rate limit)
         super.onActivityCreated(savedInstanceState);
 //        try {
@@ -100,7 +99,6 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
             // This was changed from getting the items from all the list to just getting the first 20
             Iterator<String> keys = dataObject.keys();
             while (keys.hasNext()) {
-                // TODO: check if all the values are available, !NULL
                 // right now i have access to each item of the list
                 String index = keys.next(); // this is called index because in my case the key is the id of the currency
                 JSONObject currencyObject = dataObject.getJSONObject(index);
@@ -109,8 +107,14 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
                 String symbol = currencyObject.getString("symbol");
                 String websiteSlug = currencyObject.getString("website_slug");
                 int rank = currencyObject.getInt("rank");
-                double circulatingSupply = currencyObject.getDouble("circulating_supply");
-                double totalSupply = currencyObject.getDouble("total_supply");
+                double circulatingSupply = 0.0;
+                if (currencyObject.isNull("circulating_supply")) {
+                    circulatingSupply = currencyObject.getDouble("circulating_supply");
+                }
+                double totalSupply = 0.0;
+                if (currencyObject.isNull("total_supply")) {
+                    totalSupply = currencyObject.getDouble("total_supply");
+                }
                 // BUG: check if the max supply is not null, because if it is, it's going to cause some problems
                 double maxSupply = 0;
                 if (!currencyObject.isNull("max_supply")) {
@@ -121,8 +125,14 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
                 JSONObject usdData = quotesData.getJSONObject("USD");
 
                 double price = usdData.getDouble("price");
-                BigDecimal volume24 = new BigDecimal(usdData.getDouble("volume_24h"));
-                BigDecimal marketCap = new BigDecimal(usdData.getDouble("market_cap"));
+                BigDecimal volume24 = new BigDecimal(0.0);
+                if (usdData.isNull("volume_24h")) {
+                    volume24 = new BigDecimal(usdData.getDouble("volume_24h"));
+                }
+                BigDecimal marketCap = new BigDecimal(0.0);
+                if (usdData.isNull("market_cap")) {
+                    marketCap = new BigDecimal(usdData.getDouble("market_cap"));
+                }
                 double percentChange1H = 0.0;
                 if (!usdData.isNull("percent_change_1h")) {
                     percentChange1H = usdData.getDouble("percent_change_1h");
@@ -180,7 +190,6 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
         // get the next set of data
         // the limit could be a const so it's better to defined at the top
         // TODO: check for the limit of the list, i can't just keep fetching data , what if the server ran out of data, will that crash the app since i'm gonna get an empty string?
-        // TODO: comment this line and see this is where the repeated requests are coming from
         // NOTE: this is causing RECURSION because the Fetcher will call the onTaskComplete when the job is finished, which will
         // call loadNextSetOfDataFromAPI, which will call Fetcher Again, which will call loadNextSetOfDataFromAPI which will call ......
         // you get the idea, so i need another work around, to get the next set of data
