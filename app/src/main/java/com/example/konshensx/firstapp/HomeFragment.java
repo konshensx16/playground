@@ -1,6 +1,5 @@
 package com.example.konshensx.firstapp;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +25,8 @@ import java.util.List;
  * This class will have a recyclerView and a bunch of listeners for different behaviours
  */
 public class HomeFragment extends Fragment implements OnTaskCompleted {
+    private static final String TAG = "HomeFragment";
+    private int numberOfcalls;
     private String jsonResponse;
     private List<Currency> list;
     RecyclerView recyclerView;
@@ -46,35 +48,35 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
     }
 
     /**
-     * According to a stackOverflow comment, which states that documentation says that this is the best place to access view and stuff
+     * According to a stackOverflow comment, which states that documentation says this is the best place to access view and stuff
      * @param savedInstanceState
      */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        // TODO: move this code to the onCreatedView and see if it's going to make any difference
+        // trying to see if this is what's causing the slow starting of the fragment and the 429 status code (rate limit)
         super.onActivityCreated(savedInstanceState);
-        try {
-
-            recyclerView = getActivity().findViewById(R.id.rv_list);
-            // need to set the adapter to the recycler view
-    
-            linearLayoutManager = new LinearLayoutManager(getActivity());
-//            window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-
-            this.list = new ArrayList<>();
-            // EXCEPTION THROWN HEE, cannot  cast BitcoinIndex => onTaskCompleted
-            new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank");
-
-            adapter = new Adapter(getActivity(), this.list);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+//        try {
+        recyclerView = getActivity().findViewById(R.id.rv_list);
 
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try {
+            linearLayoutManager = new LinearLayoutManager(getActivity());
+
+            this.list = new ArrayList<>();
+            // TODO: change the url to something simple and without any rate limit
+            // in order to fix the multiple request problem
+            new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank");
+//            new Fetcher(this).execute("https://jsonplaceholder.typicode.com/todos/1");
+
+            adapter = new Adapter(getActivity(), this.list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -83,11 +85,13 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
      * @param result
      */
     @Override
-    public void onTaskCompleted(String result) {
+    public void onTaskCompleted(String result, int statusCode) {
         if (result != null)
         {
             this.jsonResponse = result;
         }
+
+        Toast.makeText(getActivity(), "Status code: " + statusCode, Toast.LENGTH_SHORT).show();
         // XXX do the rest of the operations here ?
         // Parse the json string here instead of the fetcher
         try {
@@ -96,6 +100,7 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
             // This was changed from getting the items from all the list to just getting the first 20
             Iterator<String> keys = dataObject.keys();
             while (keys.hasNext()) {
+                // TODO: check if all the values are available, !NULL
                 // right now i have access to each item of the list
                 String index = keys.next(); // this is called index because in my case the key is the id of the currency
                 JSONObject currencyObject = dataObject.getJSONObject(index);
@@ -118,9 +123,18 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
                 double price = usdData.getDouble("price");
                 BigDecimal volume24 = new BigDecimal(usdData.getDouble("volume_24h"));
                 BigDecimal marketCap = new BigDecimal(usdData.getDouble("market_cap"));
-                double percentChange1H = usdData.getDouble("percent_change_1h");
-                double percentChange24H = usdData.getDouble("percent_change_24h");
-                double percentChange7D = usdData.getDouble("percent_change_7d");
+                double percentChange1H = 0.0;
+                if (!usdData.isNull("percent_change_1h")) {
+                    percentChange1H = usdData.getDouble("percent_change_1h");
+                }
+                double percentChange24H = 0.0;
+                if (!usdData.isNull("percent_change_24h")) {
+                    percentChange24H = usdData.getDouble("percent_change_24h");
+                }
+                double percentChange7D = 0.0;
+                if (!usdData.isNull("percent_change_7d")) {
+                    percentChange7D = usdData.getDouble("percent_change_7d");
+                }
 
                 // instantiating the objects
                 Quotes quotes = new Quotes(price, volume24, marketCap, percentChange1H, percentChange24H, percentChange7D);
@@ -139,6 +153,7 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
         scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                Log.i(TAG, "onLoadMore: Triggered, page: " + page + ", totalItemsCount: " + totalItemsCount);
                 // triggered only when new data needs to be appended to the list
                 // append new fetched data to the bottom of the list
                 List<Currency> newList = loadNextSetOfDataFromAPI();
@@ -161,9 +176,19 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
      */
     private List<Currency> loadNextSetOfDataFromAPI() {
         List<Currency> list = new ArrayList<>();
+        Log.i(TAG, "loadNextSetOfDataFromAPI: was called: " + this.numberOfcalls++ + " times");
         // get the next set of data
         // the limit could be a const so it's better to defined at the top
-        new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?start="+ START_INDEX +"&limit=" + LIMIT + "&sort=rank");
+        // TODO: check for the limit of the list, i can't just keep fetching data , what if the server ran out of data, will that crash the app since i'm gonna get an empty string?
+        // TODO: comment this line and see this is where the repeated requests are coming from
+        // NOTE: this is causing RECURSION because the Fetcher will call the onTaskComplete when the job is finished, which will
+        // call loadNextSetOfDataFromAPI, which will call Fetcher Again, which will call loadNextSetOfDataFromAPI which will call ......
+        // you get the idea, so i need another work around, to get the next set of data
+        // TODO: this has to change to something more dynamic, doing this currently yo avoid RATE_LIMIT problem
+        if (this.numberOfcalls <= 30) {
+            Log.i(TAG, "loadNextSetOfDataFromAPI: Fetcher was called, start_index: " + START_INDEX);
+            new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?start="+ START_INDEX +"&limit=" + LIMIT + "&sort=rank");
+        }
         // INC the value of start by the LIMIT
         this.START_INDEX += LIMIT;
 

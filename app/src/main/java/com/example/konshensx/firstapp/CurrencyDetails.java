@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,13 +58,16 @@ public class CurrencyDetails extends AppCompatActivity implements OnTaskComplete
     }
 
     @Override
-    public void onTaskCompleted(String result) {
+    public void onTaskCompleted(String result, int statusCode) {
         // TODO: maybe make a class that transforms jsonString to object and stuff
         // need to handle when the result is null
         if (result != null)
         {
             this.jsonResponse = result;
         }
+
+        Toast.makeText(this, "Status code: " + statusCode, Toast.LENGTH_SHORT).show();
+
         try {
             JSONObject jsonObject = new JSONObject(this.jsonResponse);
             JSONObject currencyObject = jsonObject.getJSONObject("data");

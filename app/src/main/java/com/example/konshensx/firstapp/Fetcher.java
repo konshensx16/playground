@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,6 +23,8 @@ import java.util.List;
 
 public class Fetcher extends AsyncTask<String, Void, String>{
 
+    private static final String TAG = "Fetcher";
+    private int statusCode;
     private OnTaskCompleted listener;
     private String jsonResponse;
 
@@ -31,6 +35,7 @@ public class Fetcher extends AsyncTask<String, Void, String>{
     }
 
     public void fetchJson(String link) {
+        Log.i(TAG, "fetchJson: Fetcher sent a request to the end point");
         String responseJSON;
         URL url;
         StringBuffer response = new StringBuffer();
@@ -51,17 +56,20 @@ public class Fetcher extends AsyncTask<String, Void, String>{
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 
             // handle the response
-            int status = conn.getResponseCode();
-            if (status != 200) {
-                throw new IOException("Post failed with error code " + status);
-            } else {
-                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                String inputLine;
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                in.close();
+            this.statusCode = conn.getResponseCode();
+            // status == 429 which means to many request to end point
+            // NOTES: i'm only sending one request when the app loads
+            //        after trying another API i got a 200 status code, meaning success
+            //        which means this error is due to the rate limit of the server
+            //        which also means this app is just a waste right now :))
+            Log.e(TAG, "fetchJson: Status code from end point " + this.statusCode);
+
+            BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
             }
+            in.close();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -81,7 +89,8 @@ public class Fetcher extends AsyncTask<String, Void, String>{
         return this.jsonResponse;
     }
 
+    // TODO: change the signature to include the status code and send it to the HomeFragment and display it in a Toast
     protected void onPostExecute(String result) {
-        listener.onTaskCompleted(this.jsonResponse);
+        listener.onTaskCompleted(this.jsonResponse, this.statusCode);
     }
 }
