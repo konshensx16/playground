@@ -6,16 +6,25 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class SearchFragment extends Fragment {
-    EditText currency_search_input;
+import java.util.List;
 
-    public SearchFragment() {}
+public class SearchFragment extends Fragment implements OnTaskCompleted{
+    EditText currency_search_input;
+    private List<Currency> currencyList;
+    private String jsonResponse;
+    private static final String TAG = "SearchFragment";
+    final OnTaskCompleted listener;
+
+    public SearchFragment() {
+        this.listener = this;
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -43,7 +52,13 @@ public class SearchFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 // Where the code needs to be
                 // TODO: might need to check if the length != 0 (optimization)
-                Toast.makeText(getActivity(), currency_search_input.getText(), Toast.LENGTH_SHORT).show();
+                if (charSequence.length() > 0) {
+                    // XXX: make the request to the API and search for the currencies
+                    // URL: https://api.coinmarketcap.com/v2/listings/?sort=rank
+                    // all result are always sorted by rank
+                    // TODO: test how much time will it take to load all currencies from listings into a list
+                    new Fetcher(listener).execute("https://api.coinmarketcap.com/v2/listings/?sort=rank");
+                }
             }
 
             @Override
@@ -64,5 +79,16 @@ public class SearchFragment extends Fragment {
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onTaskCompleted(String result, int statusCode) {
+        // XXX: parse the jsonResponse (string) to objects and add them to the currencyList
+        Log.i(TAG, "onTaskCompleted: Response code from the API: " + statusCode);
+        if (result != null) {
+            this.jsonResponse = result;
+        }
+
+
     }
 }

@@ -1,25 +1,12 @@
 package com.example.konshensx.firstapp;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Fetcher extends AsyncTask<String, Void, String>{
 
@@ -76,7 +63,6 @@ public class Fetcher extends AsyncTask<String, Void, String>{
             if (conn != null) {
                 conn.disconnect();
             }
-            //Here is your json in string format
             responseJSON = response.toString();
         }
         this.jsonResponse = responseJSON;
@@ -84,8 +70,11 @@ public class Fetcher extends AsyncTask<String, Void, String>{
 
     @Override
     protected String doInBackground(String... strings) {
-        // "https://api.coinmarketcap.com/v2/listings/"
+        long startTime = System.currentTimeMillis();
         fetchJson(strings[0]);
+        long stopTime = System.currentTimeMillis();
+        long timeElapsed = stopTime - startTime;
+        Log.i(TAG, "doInBackground: Time taken to execute the fetchJson method in ms: " + timeElapsed);
         return this.jsonResponse;
     }
 
