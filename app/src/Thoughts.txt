@@ -1,0 +1,6 @@
+- Need to load the listings into a list when the search fragment is reached
+- Create a method that searches inside the list for the currency searched for - doing this
+- Profiler is not functioning yet i think, need to test it ASAP (Fetcher) - Working but not so great, i guess? could be improved
+    - The fetchJson for the currencies (MainActivity) is taking around 1900 ms
+    - The fetchJson for the listings (SearchFragment) is taking around 1400ms
+- App crashes when typing in the search box (DEBUG)

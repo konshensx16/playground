@@ -31,6 +31,7 @@
                 android:textColor="@color/colorPrimary"/>
 
             <TextView
+                android:id="@+id/result_holder"
                 android:layout_height="500dp"
                 android:layout_width="match_parent"
                 android:text="Result Will be shown here"

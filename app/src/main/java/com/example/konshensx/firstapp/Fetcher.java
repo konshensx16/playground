@@ -22,7 +22,7 @@ public class Fetcher extends AsyncTask<String, Void, String>{
     }
 
     public void fetchJson(String link) {
-        Log.i(TAG, "fetchJson: Fetcher sent a request to the end point");
+        long timer_start = System.currentTimeMillis();
         String responseJSON;
         URL url;
         StringBuffer response = new StringBuffer();
@@ -66,15 +66,20 @@ public class Fetcher extends AsyncTask<String, Void, String>{
             responseJSON = response.toString();
         }
         this.jsonResponse = responseJSON;
+        long timer_stop = System.currentTimeMillis();
+
+        Log.i(TAG, "fetchJson: Time elapsed to get for the request in ms: " + (timer_stop - timer_start));
     }
 
     @Override
     protected String doInBackground(String... strings) {
+        // TODO: might need to move this to the fetchJson function
+        // currently it takes 130ms to execute this, which is kind of fast enough
         long startTime = System.currentTimeMillis();
         fetchJson(strings[0]);
         long stopTime = System.currentTimeMillis();
         long timeElapsed = stopTime - startTime;
-        Log.i(TAG, "doInBackground: Time taken to execute the fetchJson method in ms: " + timeElapsed);
+        Log.i(TAG, "FetcherProfiler: Time taken to execute the fetchJson method in ms: " + timeElapsed);
         return this.jsonResponse;
     }
 
