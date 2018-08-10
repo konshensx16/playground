@@ -1,6 +1,10 @@
 - Need to load the listings into a list when the search fragment is reached
-- Create a method that searches inside the list for the currency searched for - doing this
+- Create a method that searches inside the list for the currency searched for -~ fixed, will be improved in the future
+    - to get more result, for now will create a temp list and add corresponding search results to it, and then pass it to the adapter
+    - PRBLMS of this approach:
+        - the list is quite large (about 1800 item), each time i need clear the list and add the result to list
+        - by each time i mean every time the user types a character in
 - Profiler is not functioning yet i think, need to test it ASAP (Fetcher) - Working but not so great, i guess? could be improved
     - The fetchJson for the currencies (MainActivity) is taking around 1900 ms
     - The fetchJson for the listings (SearchFragment) is taking around 1400ms
-- App crashes when typing in the search box (DEBUG)
+- App crashes when typing in the search box (onTextChangeEvent) (DEBUG) -~ fixed
