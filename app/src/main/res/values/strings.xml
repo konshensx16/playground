@@ -5,4 +5,5 @@
     <string name="currency_search_input">Search for currencies…</string>
     <string name="currency_recent_search">Recent searches</string>
     <string name="setting_text">Settings</string>
+    <string name="search_title_holder">Searching for <b>%1$s</b>, displaying <b>%2$d</b> results</string>
 </resources>

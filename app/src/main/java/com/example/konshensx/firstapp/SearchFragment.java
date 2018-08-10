@@ -34,6 +34,7 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private EditText currency_search_input;
+    TextView search_title_holer;
 
     public SearchFragment() {
         this.listener = this;
@@ -56,6 +57,8 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         currency_search_input = view.findViewById(R.id.currency_search_input);
+        search_title_holer = view.findViewById(R.id.search_title_holder);
+
         // TODO: this code needs to move to somewhere like 'onViewCreated'
         // Where the code needs to be
         // TODO: might need to check if the length != 0 (optimization)
@@ -93,6 +96,14 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
                     // notify the adapter of the changes made to the list
                     searchAdapter.notifyDataSetChanged();
                     Log.i(TAG, "onTextChanged: Just to debug the searchList");
+                    // Set the search_title_holder to what the user is searching for
+                    if (charSequence.length() > 0)
+                    {
+                        String title_holder = getString(R.string.search_title_holder, charSequence, searchList.size());
+                        search_title_holer.setText(title_holder);
+                    } else {
+                        search_title_holer.setText(getString(R.string.currency_recent_search));
+                    }
                 } catch (Exception e)
                 {
                     e.printStackTrace();

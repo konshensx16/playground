@@ -23,6 +23,7 @@
                 android:hint="@string/currency_search_input" />
 
             <TextView
+                android:id="@+id/search_title_holder"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:textSize="25sp"

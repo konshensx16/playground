@@ -12,3 +12,9 @@
     the app crashes when the SearchFragment is loading, so this requires some attention -~ fixed
     - The app still crashes when the user types in more than 5 characters -~ fixed
     - The list is not being modified when input changes (change the way the adapter is notified about changes to DataSetChanged) -~ fixed
+--------------------------------------------------------------------------
+- Handle the click of each recyclerView item and redirect to the currency details activity -~ working
+    - Problem is when accessing the currency details from the search, clicking the back arrow takes you to the main activity
+        instead of the search page
+- Change the text in the search_layout from recent search to the user input when typing something
+- Display the number of results found
