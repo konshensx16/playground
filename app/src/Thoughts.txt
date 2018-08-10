@@ -8,3 +8,7 @@
     - The fetchJson for the currencies (MainActivity) is taking around 1900 ms
     - The fetchJson for the listings (SearchFragment) is taking around 1400ms
 - App crashes when typing in the search box (onTextChangeEvent) (DEBUG) -~ fixed
+- Just implemented the search adapter and created the required layouts, currently -~ everything fixed
+    the app crashes when the SearchFragment is loading, so this requires some attention -~ fixed
+    - The app still crashes when the user types in more than 5 characters -~ fixed
+    - The list is not being modified when input changes (change the way the adapter is notified about changes to DataSetChanged) -~ fixed

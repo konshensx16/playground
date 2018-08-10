@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -21,13 +24,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchFragment extends Fragment implements OnTaskCompleted{
-    EditText currency_search_input;
-    private List<Listing> listingList;
-    private List<Listing> searchList;
+    private List<Listing> listingList = new ArrayList<>();
+    private final List<Listing> searchList = new ArrayList<>();
     private String jsonResponse;
-    private static final String TAG = "SearchFragment";
+    private SearchAdapter searchAdapter;
     final OnTaskCompleted listener;
-    TextView resultHolderView;
+    private static final String TAG = "SearchFragment";
+
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+    private EditText currency_search_input;
 
     public SearchFragment() {
         this.listener = this;
@@ -36,6 +42,8 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        // get & set the recycler view
+        recyclerView = getActivity().findViewById(R.id.search_recyclerView);
     }
 
     @Override
@@ -48,15 +56,13 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         currency_search_input = view.findViewById(R.id.currency_search_input);
-        resultHolderView = view.findViewById(R.id.result_holder);
-        searchList = new ArrayList<>();
         // TODO: this code needs to move to somewhere like 'onViewCreated'
         // Where the code needs to be
         // TODO: might need to check if the length != 0 (optimization)
         // XXX: make the request to the API and search for the currencies
         // URL: https://api.coinmarketcap.com/v2/listings/?sort=rank
         // all result are always sorted by rank
-        // TODO: test how much time will it take to load all currencies from listings into a list
+        // TODO: test how much time will it take to load all currencies from listings into a list (profiler)
         new Fetcher(listener).execute("https://api.coinmarketcap.com/v2/listings/?sort=rank");
 
         // TODO: handle the input of the user, on change display the input in a Toast
@@ -79,14 +85,13 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
                         // checking if the name contains the typed character (user input)
                         // probably make the user input lower case too, for consistency and yielding better result
                         if (listingObject.getName().toLowerCase().contains(charSequence)) {
-                            // XXX; stop the search and show the result, currently showing just the first result
                             // TODO: i'm gonna need to create an adapter and recyclerView for the search result
                             // add the item (the one found) to the list
                             searchList.add(listingObject);
-                            // TODO: remove this line, just for testing purposes
-                            resultHolderView.setText(listingObject.getName());
                         }
                     }
+                    // notify the adapter of the changes made to the list
+                    searchAdapter.notifyDataSetChanged();
                     Log.i(TAG, "onTextChanged: Just to debug the searchList");
                 } catch (Exception e)
                 {
@@ -104,6 +109,13 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try {
+            linearLayoutManager = new LinearLayoutManager(getContext());
+
+            searchAdapter = new SearchAdapter(getContext(), this.searchList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -113,9 +125,7 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
             Log.i(TAG, "onTaskCompleted: Response code from the API: " + statusCode);
             if (result != null) {
                 this.jsonResponse = result;
-                listingList = new ArrayList<>();
-                // XXX: set the jsonResponse string to the text
-                resultHolderView.setText(result);
+
             } else {
                 throw new Exception("JsonResponse string is empty");
             }
@@ -164,6 +174,11 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
                 Listing listing = new Listing(id, name, symbol, website_slug);
 
                 this.listingList.add(listing);
+
+                // TODO: maybe look for somewhere else to put this code
+                recyclerView.setAdapter(searchAdapter);
+                recyclerView.setLayoutManager(linearLayoutManager);
+                // Set any required events listeners (probably scroll, for the endless scroll effect)
             }
         } catch (JSONException e)
         {

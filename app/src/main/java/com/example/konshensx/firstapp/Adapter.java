@@ -1,6 +1,5 @@
 package com.example.konshensx.firstapp;
 
-import android.content.ContentProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -54,7 +52,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     public void onBindViewHolder(@NonNull myViewHolder myViewHolder, final int i) {
         myViewHolder.symbol.setText(mData.get(i).getSymbol());
         myViewHolder.name.setText(mData.get(i).getName());
-        // TODO: this needs to be formatted and displayed with the currency
         myViewHolder.price.setText(String.format("%,f $", mData.get(i).getQuotes().getPrice()));
         if (mData.get(i).getQuotes().getPercentChange1H() > 0)
         {
@@ -92,9 +89,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
      */
     public class myViewHolder extends RecyclerView.ViewHolder
     {
-
         ImageView background_img;
-        TextView  symbol;
+        TextView symbol;
         TextView name;
         TextView price;
         TextView change;

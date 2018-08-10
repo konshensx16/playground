@@ -30,12 +30,12 @@
                 android:text="@string/currency_recent_search"
                 android:textColor="@color/colorPrimary"/>
 
-            <TextView
-                android:id="@+id/result_holder"
-                android:layout_height="500dp"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/search_recyclerView"
                 android:layout_width="match_parent"
-                android:text="Result Will be shown here"
-                android:background="@color/colorPrimary"/>
+                android:layout_height="500dp"
+                android:background="#3A2F63"
+                android:scrollbars="vertical"/>
 
 
         </LinearLayout>
