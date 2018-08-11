@@ -89,6 +89,7 @@ public class BitcoinIndex extends AppCompatActivity {
         transaction.commit();
     }
 
+    // TODO: remove this method not really needed any more
     private void setupTransition()
     {
         Slide slide = new Slide();

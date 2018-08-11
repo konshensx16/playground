@@ -103,6 +103,8 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
                         String title_holder = getString(R.string.search_title_holder, charSequence, searchList.size());
                         search_title_holer.setText(title_holder);
                     } else {
+                        // clear the search list when the EditText is empty
+                        searchList.clear();
                         search_title_holer.setText(getString(R.string.currency_recent_search));
                     }
                 } catch (Exception e)
