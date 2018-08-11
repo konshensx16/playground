@@ -57,6 +57,7 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
         super.onActivityCreated(savedInstanceState);
 //        try {
         recyclerView = getActivity().findViewById(R.id.rv_list);
+        getActivity().setTitle(getString(R.string.app_name));
 
     }
 

@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">FirstApp</string>
+    <string name="app_name">Vertex Tracker</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
     <string name="currency_search_input">Search for currencies…</string>
     <string name="currency_recent_search">Recent searches</string>
     <string name="setting_text">Settings</string>
+    <string name="search_text">Search</string>
     <string name="loading_text">Loading…</string>
     <string name="rank_text">Rank</string>
     <string name="price_text">Price</string>

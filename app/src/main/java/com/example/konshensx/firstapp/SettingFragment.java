@@ -22,6 +22,8 @@ public class SettingFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivity().setTitle(getString(R.string.setting_text));
+
     }
 
     public static SettingFragment newInstance(String param1, String param2) {

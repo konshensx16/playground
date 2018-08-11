@@ -31,4 +31,5 @@
         instead of recent search, it's almost 2AM which is not a great time to make decisions
 
 - Clear the search results (recyclerView) when the EditText is empty (charSequence == 0) -~ fixed
-- Try to change the CurrencyDetails from an activity to a Fragment and load it in the FrameLayout - REQUIRES SOME ATTENTION
+- Try to change the CurrencyDetails from an activity to a Fragment and load it in the FrameLayout -~ fixed
+- BUG: the titleBar is not changing back to the fragment title after accessing the one of the CurrencyDetails -~ fixed

@@ -9,12 +9,12 @@
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark">
 
-    <TextView
-        android:layout_width="141dp"
-        android:layout_height="145dp"
-        android:text="Vertex Tracker"
-        android:textSize="30sp"
-        android:textColor="@android:color/white" />
+    <!--<TextView-->
+        <!--android:layout_width="141dp"-->
+        <!--android:layout_height="145dp"-->
+        <!--android:text="Vertex Tracker"-->
+        <!--android:textSize="30sp"-->
+        <!--android:textColor="@android:color/white" />-->
 
     <FrameLayout
         android:id="@+id/frame_container"

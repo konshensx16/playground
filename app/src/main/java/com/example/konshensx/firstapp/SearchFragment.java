@@ -59,6 +59,8 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
         currency_search_input = view.findViewById(R.id.currency_search_input);
         search_title_holer = view.findViewById(R.id.search_title_holder);
 
+        getActivity().setTitle(getString(R.string.search_text));
+
         // TODO: this code needs to move to somewhere like 'onViewCreated'
         // Where the code needs to be
         // TODO: might need to check if the length != 0 (optimization)
