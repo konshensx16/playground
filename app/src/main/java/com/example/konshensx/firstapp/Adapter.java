@@ -86,6 +86,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     public void loadFragment (Fragment fragment)
     {
         FragmentTransaction transaction = this.fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         transaction.replace(R.id.frame_container, fragment, "fragment");
         transaction.addToBackStack(null);
         transaction.commit();

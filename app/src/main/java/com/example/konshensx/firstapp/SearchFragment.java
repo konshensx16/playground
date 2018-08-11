@@ -127,7 +127,7 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
         try {
             linearLayoutManager = new LinearLayoutManager(getContext());
 
-            searchAdapter = new SearchAdapter(getContext(), this.searchList);
+            searchAdapter = new SearchAdapter(getContext(), this.searchList, getActivity().getSupportFragmentManager());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -201,10 +201,4 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
         }
     }
 
-    private void setupTransition()
-    {
-        Fade fade = new Fade();
-        fade.setDuration(400);
-        getActivity().getWindow().setEnterTransition(fade);
-    }
 }
