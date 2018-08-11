@@ -2,7 +2,7 @@
 - Create a method that searches inside the list for the currency searched for -~ fixed, will be improved in the future
     - to get more result, for now will create a temp list and add corresponding search results to it, and then pass it to the adapter
     - PRBLMS of this approach:
-        - the list is quite large (about 1800 item), each time i need clear the list and add the result to list
+        - the list is quite large (about 1800 item), each time i to need clear the list and add the result to list
         - by each time i mean every time the user types a character in
 - Profiler is not functioning yet i think, need to test it ASAP (Fetcher) - Working but not so great, i guess? could be improved
     - The fetchJson for the currencies (MainActivity) is taking around 1900 ms
@@ -19,5 +19,13 @@
 - Change the text in the search_layout from recent search to the user input when typing something -~ fixed
 - Display the number of results found -~ fixed
 
-- Try to change the CurrencyDetails from an activity to a Fragment and load it in the FrameLayout
-- I really need to get rid of the Toasts that were used for testing they're becoming a pain in the ass
+- Try to change the CurrencyDetails from an activity to a Fragment and load it in the FrameLayout - REQUIRES SOME ATTENTION
+- I really need to get rid of the Toasts that were used for testing they're becoming a pain in the ass -~ fixed
+
+- I wanna add some animation to the transition between fragments, the current animation is so dry
+    - https://github.com/lgvalle/Material-Animations
+
+- Work on the recent searches functionality - DOING
+    - NOTES: this is going to a lil bit complicated in terms of logic so what i'm thinking
+        about doing instead is just display the global values of the market in there
+        instead of recent search, it's almost 2AM which is not a great time to make decisions

@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Slide;
 import android.view.MenuItem;
 import android.view.Window;
 
@@ -22,6 +23,9 @@ public class BitcoinIndex extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         try {
             super.onCreate(savedInstanceState);
+            // setup exit transition
+//            setupTransition();
+
             //Remove title bar
             this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -79,9 +83,18 @@ public class BitcoinIndex extends AppCompatActivity {
     private void loadFragment(Fragment fragment) {
         // load fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private void setupTransition()
+    {
+        Slide slide = new Slide();
+        slide.setDuration(400);
+
+        getWindow().setExitTransition(slide);
     }
 
 

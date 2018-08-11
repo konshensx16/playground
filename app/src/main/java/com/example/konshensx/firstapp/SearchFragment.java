@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.transition.Fade;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -120,6 +121,7 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        setupTransition();
         try {
             linearLayoutManager = new LinearLayoutManager(getContext());
 
@@ -195,5 +197,12 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
         {
             e.printStackTrace();
         }
+    }
+
+    private void setupTransition()
+    {
+        Fade fade = new Fade();
+        fade.setDuration(400);
+        getActivity().getWindow().setEnterTransition(fade);
     }
 }
