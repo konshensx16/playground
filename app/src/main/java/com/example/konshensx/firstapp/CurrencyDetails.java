@@ -2,9 +2,14 @@ package com.example.konshensx.firstapp;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +19,7 @@ import org.json.JSONObject;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
-public class CurrencyDetails extends AppCompatActivity implements OnTaskCompleted {
+public class CurrencyDetails extends Fragment implements OnTaskCompleted {
 
     private String jsonResponse;
     TextView nameDetailsHolderView;
@@ -29,34 +34,53 @@ public class CurrencyDetails extends AppCompatActivity implements OnTaskComplete
     TextView change24hView;
     TextView change7dView;
 
+    public CurrencyDetails() {}
+
+    @Override
+    @Nullable
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.activity_currency_details, container, false);
+    }
+
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        // get the view elements
+        // Maybe i need to put these in the "onActivityCreated" method, in case of NullPtrException
+        // TODO: some of these are returning null, REQUIRES SERIOUS ATTENTION
+        nameDetailsHolderView = getActivity().findViewById(R.id.nameDetails);
+
+        // initialize the views
+        nameHolder = getActivity().findViewById(R.id.name);
+        rankHolder = getActivity().findViewById(R.id.rank);
+        priceHolder = getActivity().findViewById(R.id.price);
+        marketCapView = getActivity().findViewById(R.id.marketcap);
+        volumeView = getActivity().findViewById(R.id.volume);
+        totalSupplyView = getActivity().findViewById(R.id.totalSupply);
+        circulatingSupplyView = getActivity().findViewById(R.id.circulatingSupply);
+        change1hView = getActivity().findViewById(R.id.change1h);
+        change24hView = getActivity().findViewById(R.id.change24h);
+        change7dView = getActivity().findViewById(R.id.change7d);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_currency_details);
+        // TODO : remove this line (useless)
+//        setContentView(R.layout.activity_currency_details);
 
+        // TODO: get rid of this because the id will be retrieved in the constructor
+
+        /*
         // get the intent that started the activity and get the string
-        Intent intent = getIntent();
+
+        Intent intent = getActivity().getIntent();
         // get the ID from the intent
         int message = intent.getIntExtra(Adapter.EXTRA_MESSAGE, 0);
-
+        */
         // https://api.coinmarketcap.com/v2/ticker/1/
-        String ajaxUrl = "https://api.coinmarketcap.com/v2/ticker/" + message;
+        String ajaxUrl = "https://api.coinmarketcap.com/v2/ticker/" + getArguments().getInt("currency_id");
         new Fetcher(this).execute(ajaxUrl);
-        // get the view elements
-        nameDetailsHolderView = findViewById(R.id.nameDetails);
 
-        // initialize the views
-        nameHolder = findViewById(R.id.name);
-        rankHolder = findViewById(R.id.rank);
-        priceHolder = findViewById(R.id.price);
-        marketCapView = findViewById(R.id.marketcap);
-        volumeView = findViewById(R.id.volume);
-        totalSupplyView = findViewById(R.id.totalSupply);
-        circulatingSupplyView = findViewById(R.id.circulatingSupply);
-        change1hView = findViewById(R.id.change1h);
-        change24hView = findViewById(R.id.change24h);
-        change7dView = findViewById(R.id.change7d);
     }
 
     @Override
@@ -111,7 +135,7 @@ public class CurrencyDetails extends AppCompatActivity implements OnTaskComplete
             totalSupplyView.setText(String.format("%,.0f $", totalSupply));
             circulatingSupplyView.setText(String.format("%,.0f %s", circulatingSupply, symbol));
 
-            setTitle(String.format("%s Details", name));
+            getActivity().setTitle(String.format("%s Details", name));
 
             change1hView.setText(String.format("%,.2f %%", percentChange1H));
             if (percentChange1H > 0)
@@ -138,5 +162,15 @@ public class CurrencyDetails extends AppCompatActivity implements OnTaskComplete
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public static CurrencyDetails newInstance(int currency_id) {
+        CurrencyDetails myFragment = new CurrencyDetails();
+
+        Bundle args = new Bundle();
+        args.putInt("currency_id", currency_id);
+        myFragment.setArguments(args);
+
+        return myFragment;
     }
 }

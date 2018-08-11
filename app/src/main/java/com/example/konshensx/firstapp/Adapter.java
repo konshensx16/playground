@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,10 +23,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     private Context myContext;
 
     private List<Currency> mData;
+    private FragmentManager fragmentManager;
 
-    public Adapter(Context context, List<Currency> mData) {
+    public Adapter(Context context, List<Currency> mData, FragmentManager fragmentManager) {
         this.myContext = context;
         this.mData = mData;
+        this.fragmentManager = fragmentManager;
     }
 
     /**
@@ -61,18 +66,29 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
         }
         myViewHolder.change.setText(String.format("%,.2f %%", mData.get(i).getQuotes().getPercentChange1H()));
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked");
-                Intent intent = new Intent(myContext, CurrencyDetails.class);
+                // replace this with a fragment instead of an activity
+                CurrencyDetails currencyDetailsFragment = CurrencyDetails.newInstance(mData.get(i).getId());
+                loadFragment(currencyDetailsFragment);
+
+                /*Intent intent = new Intent(myContext, CurrencyDetails.class);
                 int id = mData.get(i).getId();
                 intent.putExtra(EXTRA_MESSAGE, id);
                 myContext.startActivity(intent);
+                */
             }
         });
 //        myViewHolder
+    }
 
+    public void loadFragment (Fragment fragment)
+    {
+        FragmentTransaction transaction = this.fragmentManager.beginTransaction();
+        transaction.replace(R.id.frame_container, fragment, "fragment");
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     /**

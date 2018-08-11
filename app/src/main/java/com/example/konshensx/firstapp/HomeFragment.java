@@ -33,6 +33,7 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
     LinearLayoutManager linearLayoutManager;
     BottomNavigationView navigation;
     private EndlessRecyclerViewScrollListener scrollListener;
+
 //    CONSTS
     // the number of currencies to get in each request
     final int LIMIT = 10;
@@ -64,14 +65,11 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
         super.onCreate(savedInstanceState);
         try {
             linearLayoutManager = new LinearLayoutManager(getActivity());
-
             this.list = new ArrayList<>();
-            // TODO: change the url to something simple and without any rate limit
-            // in order to fix the multiple request problem
-            new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank");
-//            new Fetcher(this).execute("https://jsonplaceholder.typicode.com/todos/1");
 
-            adapter = new Adapter(getActivity(), this.list);
+            new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank");
+
+            adapter = new Adapter(getActivity(), this.list, getActivity().getSupportFragmentManager());
         } catch (Exception e) {
             e.printStackTrace();
         }
