@@ -16,5 +16,8 @@
 - Handle the click of each recyclerView item and redirect to the currency details activity -~ working
     - Problem is when accessing the currency details from the search, clicking the back arrow takes you to the main activity
         instead of the search page
-- Change the text in the search_layout from recent search to the user input when typing something
-- Display the number of results found
+- Change the text in the search_layout from recent search to the user input when typing something -~ fixed
+- Display the number of results found -~ fixed
+
+- Try to change the CurrencyDetails from an activity to a Fragment and load it in the FrameLayout
+- I really need to get rid of the Toasts that were used for testing they're becoming a pain in the ass

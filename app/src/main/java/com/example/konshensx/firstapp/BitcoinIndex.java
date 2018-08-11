@@ -34,7 +34,6 @@ public class BitcoinIndex extends AppCompatActivity {
 
             navigation = findViewById(R.id.navigation);
             navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
             CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
             layoutParams.setBehavior(new BottomNavigationBehavior());
 

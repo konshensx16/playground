@@ -2,6 +2,7 @@ package com.example.konshensx.firstapp;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ public class CurrencyDetails extends AppCompatActivity implements OnTaskComplete
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_currency_details);
 
@@ -45,6 +46,7 @@ public class CurrencyDetails extends AppCompatActivity implements OnTaskComplete
         // get the view elements
         nameDetailsHolderView = findViewById(R.id.nameDetails);
 
+        // initialize the views
         nameHolder = findViewById(R.id.name);
         rankHolder = findViewById(R.id.rank);
         priceHolder = findViewById(R.id.price);
@@ -65,8 +67,6 @@ public class CurrencyDetails extends AppCompatActivity implements OnTaskComplete
         {
             this.jsonResponse = result;
         }
-
-        Toast.makeText(this, "Status code: " + statusCode, Toast.LENGTH_SHORT).show();
 
         try {
             JSONObject jsonObject = new JSONObject(this.jsonResponse);
@@ -103,6 +103,7 @@ public class CurrencyDetails extends AppCompatActivity implements OnTaskComplete
             nameDetailsHolderView.setText(String.format("%s DETAILS", name.toUpperCase()));
             nameHolder.setText(name);
             // in here i have to format the string because passing the rank which is an int will crash the app
+            // TODO: maybe put this in a string resource instead of just this, for reusability
             rankHolder.setText(String.format("%d", rank));
             priceHolder.setText(String.format("%,.0f USD", price));
             marketCapView.setText(String.format("%,.0f $", marketCap));

@@ -5,5 +5,17 @@
     <string name="currency_search_input">Search for currencies…</string>
     <string name="currency_recent_search">Recent searches</string>
     <string name="setting_text">Settings</string>
+    <string name="loading_text">Loading…</string>
+    <string name="rank_text">Rank</string>
+    <string name="price_text">Price</string>
+    <string name="total_supply_text">Total supply</string>
+    <string name="circulating_supply_text">Circulating Supply</string>
+    <string name="change_1h_text">Change 1H</string>
+    <string name="change_24h_text">Change 24H</string>
+    <string name="change_7d_text">Change 7D</string>
+    <string name="volume_24h_text">Volume 24H</string>
+    <string name="market_cap_text">Market Cap</string>
+    <string name="name_text">Name</string>
+    <string name="currency_details_text">CURRENCY DETAILS</string>
     <string name="search_title_holder">Searching for <b>%1$s</b>, displaying <b>%2$d</b> results</string>
 </resources>

@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -90,7 +89,6 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
             this.jsonResponse = result;
         }
 
-        Toast.makeText(getActivity(), "Status code: " + statusCode, Toast.LENGTH_SHORT).show();
         // XXX do the rest of the operations here ?
         // Parse the json string here instead of the fetcher
         try {

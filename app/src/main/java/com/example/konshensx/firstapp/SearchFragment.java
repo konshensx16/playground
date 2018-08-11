@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -65,10 +64,9 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
         // XXX: make the request to the API and search for the currencies
         // URL: https://api.coinmarketcap.com/v2/listings/?sort=rank
         // all result are always sorted by rank
-        // TODO: test how much time will it take to load all currencies from listings into a list (profiler)
+        // TODO: profile how much time will it take to load all currencies from listings into a list (profiler)
         new Fetcher(listener).execute("https://api.coinmarketcap.com/v2/listings/?sort=rank");
 
-        // TODO: handle the input of the user, on change display the input in a Toast
         currency_search_input.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -87,7 +85,9 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
                         Listing listingObject = listingList.get(index);
                         // checking if the name contains the typed character (user input)
                         // probably make the user input lower case too, for consistency and yielding better result
-                        if (listingObject.getName().toLowerCase().contains(charSequence)) {
+                        if (listingObject.getName().toLowerCase().contains(charSequence)
+                                ||
+                                listingObject.getSymbol().toLowerCase().contains(charSequence)) {
                             // TODO: i'm gonna need to create an adapter and recyclerView for the search result
                             // add the item (the one found) to the list
                             searchList.add(listingObject);
