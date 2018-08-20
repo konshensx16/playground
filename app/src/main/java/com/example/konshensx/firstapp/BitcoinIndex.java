@@ -8,8 +8,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.transition.Slide;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 
 
@@ -18,6 +18,7 @@ public class BitcoinIndex extends AppCompatActivity {
 
     BottomNavigationView navigation;
     ActionBar toolbar;
+    CoordinatorLayout coordinator_container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +36,12 @@ public class BitcoinIndex extends AppCompatActivity {
             toolbar = getSupportActionBar();
             //Remove notification bar
 //            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            coordinator_container = findViewById(R.id.coordinator_container);
+
 
             navigation = findViewById(R.id.navigation);
-            navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+//            navigation.setVisibility(View.INVISIBLE);
+             navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
             CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
             layoutParams.setBehavior(new BottomNavigationBehavior());
 
@@ -83,20 +87,11 @@ public class BitcoinIndex extends AppCompatActivity {
     private void loadFragment(Fragment fragment) {
         // load fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+        transaction.setCustomAnimations(android.R.anim.fade_in
+                , android.R.anim.fade_out);
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
-    // TODO: remove this method not really needed any more
-    private void setupTransition()
-    {
-        Slide slide = new Slide();
-        slide.setDuration(400);
-
-        getWindow().setExitTransition(slide);
-    }
-
 
 }

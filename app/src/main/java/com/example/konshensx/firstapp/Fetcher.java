@@ -49,7 +49,7 @@ public class Fetcher extends AsyncTask<String, Void, String>{
             //        after trying another API i got a 200 status code, meaning success
             //        which means this error is due to the rate limit of the server
             //        which also means this app is just a waste right now :))
-            Log.e(TAG, "fetchJson: Status code from end point " + this.statusCode);
+//            Log.e(TAG, "fetchJson: Status code from end point " + this.statusCode);
 
             BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String inputLine;
@@ -73,13 +73,7 @@ public class Fetcher extends AsyncTask<String, Void, String>{
 
     @Override
     protected String doInBackground(String... strings) {
-        // TODO: might need to move this to the fetchJson function
-        // currently it takes 130ms to execute this, which is kind of fast enough
-        long startTime = System.currentTimeMillis();
         fetchJson(strings[0]);
-        long stopTime = System.currentTimeMillis();
-        long timeElapsed = stopTime - startTime;
-        Log.i(TAG, "FetcherProfiler: Time taken to execute the fetchJson method in ms: " + timeElapsed);
         return this.jsonResponse;
     }
 

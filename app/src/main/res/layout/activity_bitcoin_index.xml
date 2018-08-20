@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
+
+<android.support.design.widget.CoordinatorLayout
     android:layout_height="match_parent"
-    tools:context=".BitcoinIndex"
-    android:orientation="vertical"
-    android:background="@color/colorPrimaryDark">
+    android:layout_width="match_parent"
+    android:id="@+id/coordinator_container_root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!--<TextView-->
-        <!--android:layout_width="141dp"-->
-        <!--android:layout_height="145dp"-->
-        <!--android:text="Vertex Tracker"-->
-        <!--android:textSize="30sp"-->
-        <!--android:textColor="@android:color/white" />-->
-
-    <FrameLayout
-        android:id="@+id/frame_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/coordinator_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
-        app:itemBackground="@color/colorPrimaryDark"
-        android:foreground="?attr/selectableItemBackground"
-        app:itemIconTint="@android:color/white"
-        app:itemTextColor="@android:color/white"
-        app:menu="@menu/navigation" />
+        android:layout_marginBottom="56dp"
+        tools:context=".BitcoinIndex"
+        android:background="@color/colorPrimaryDark">
+
+        <FrameLayout
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.BottomNavigationView
+    android:id="@+id/navigation"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:layout_gravity="bottom"
+    android:background="?android:attr/windowBackground"
+    android:foreground="?attr/selectableItemBackground"
+    app:itemBackground="@color/colorPrimaryDark"
+    app:itemIconTint="@color/colorPrimary"
+    app:itemTextColor="@color/colorPrimary"
+    app:menu="@menu/navigation" />
 
 </android.support.design.widget.CoordinatorLayout>

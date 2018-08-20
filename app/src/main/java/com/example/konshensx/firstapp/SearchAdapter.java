@@ -20,7 +20,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.mySearchVi
     private List<Listing> mySearchList;
     private FragmentManager fragmentManager;
 
-    public SearchAdapter(Context myContext, List<Listing> myList, FragmentManager fragmentManager) {
+    public  SearchAdapter(Context myContext, List<Listing> myList, FragmentManager fragmentManager) {
         this.myContext = myContext;
         this.mySearchList = myList;
         this.fragmentManager = fragmentManager;
@@ -42,20 +42,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.mySearchVi
         mySearchViewHolder.symbol.setText(mySearchList.get(i).getSymbol());
         mySearchViewHolder.website_slug.setText(mySearchList.get(i).getWebsite_slug());
 
-        // TODO: set an onClick event listener on the itemView
-        // Also pass the id to the CurrencyDetails page and display it
         mySearchViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CurrencyDetails currencyDetailsFragment = CurrencyDetails.newInstance(mySearchList.get(i).getId());
                 loadFragment(currencyDetailsFragment);
-
-                /*
-                Intent intent = new Intent(myContext, CurrencyDetails.class);
-                int id = mySearchList.get(i).getId();
-                intent.putExtra(EXTRA_MESSAGE, id);
-                myContext.startActivity(intent);
-                */
             }
         });
     }
@@ -82,7 +73,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.mySearchVi
 
         public mySearchViewHolder(@NonNull View itemView) {
             super(itemView);
-            // TODO: set the result to the views (needs to be created)
             name = itemView.findViewById(R.id.search_card_name);
             symbol = itemView.findViewById(R.id.search_card_symbol);
             website_slug = itemView.findViewById(R.id.search_card_website_slug);

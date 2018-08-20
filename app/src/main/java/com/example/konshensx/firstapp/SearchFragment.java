@@ -45,6 +45,9 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
         super.onActivityCreated(savedInstanceState);
         // get & set the recycler view
         recyclerView = getActivity().findViewById(R.id.search_recyclerView);
+        recyclerView.setAdapter(new SearchAdapter(getActivity(), this.searchList, getActivity().getSupportFragmentManager()));
+        // TODO: check if the recyclerView is already attached to a window
+        recyclerView.setLayoutManager(linearLayoutManager);
     }
 
     @Override
@@ -61,13 +64,10 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
 
         getActivity().setTitle(getString(R.string.search_text));
 
-        // TODO: this code needs to move to somewhere like 'onViewCreated'
-        // Where the code needs to be
         // TODO: might need to check if the length != 0 (optimization)
         // XXX: make the request to the API and search for the currencies
         // URL: https://api.coinmarketcap.com/v2/listings/?sort=rank
         // all result are always sorted by rank
-        // TODO: profile how much time will it take to load all currencies from listings into a list (profiler)
         new Fetcher(listener).execute("https://api.coinmarketcap.com/v2/listings/?sort=rank");
 
         currency_search_input.addTextChangedListener(new TextWatcher() {
@@ -91,7 +91,6 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
                         if (listingObject.getName().toLowerCase().contains(charSequence)
                                 ||
                                 listingObject.getSymbol().toLowerCase().contains(charSequence)) {
-                            // TODO: i'm gonna need to create an adapter and recyclerView for the search result
                             // add the item (the one found) to the list
                             searchList.add(listingObject);
                         }
@@ -153,10 +152,8 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
 
         // Should i create a new class called listing for the "listings" ?
         try {
-            // TODO: create custom exceptions and check if the values are not null
             JSONObject jsonObject = new JSONObject(this.jsonResponse);
             // The listing is actually an array of JsonObjects and not an object of objects, using an array is better than an iterator, i guess
-            // TODO: JSONException @5098 thrown here
             JSONArray dataArray = jsonObject.getJSONArray("data");
 
             // iterate over the data objects

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,7 +36,7 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
     BottomNavigationView navigation;
     private EndlessRecyclerViewScrollListener scrollListener;
 
-//    CONSTS
+    //    CONSTS
     // the number of currencies to get in each request
     final int LIMIT = 10;
     // the number from where the next data should start
@@ -57,7 +59,13 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
         super.onActivityCreated(savedInstanceState);
 //        try {
         recyclerView = getActivity().findViewById(R.id.rv_list);
-        getActivity().setTitle(getString(R.string.app_name));
+
+//        Create a basis snack bar and display it
+        Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.coordinator_container), "No internet connection", Snackbar.LENGTH_INDEFINITE);
+        snackbar.show();
+
+        Toast toast = Toast.makeText(getContext(), "isShown: " + snackbar.isShown(), Toast.LENGTH_LONG);
+        toast.show();
 
     }
 
@@ -65,12 +73,12 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            linearLayoutManager = new LinearLayoutManager(getActivity());
+            linearLayoutManager = new LinearLayoutManager(getContext());
             this.list = new ArrayList<>();
+            adapter = new Adapter(getContext(), this.list, getActivity().getSupportFragmentManager());
 
             new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank");
 
-            adapter = new Adapter(getActivity(), this.list, getActivity().getSupportFragmentManager());
         } catch (Exception e) {
             e.printStackTrace();
         }

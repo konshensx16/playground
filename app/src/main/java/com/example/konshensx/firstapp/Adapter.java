@@ -73,6 +73,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
                 CurrencyDetails currencyDetailsFragment = CurrencyDetails.newInstance(mData.get(i).getId());
                 loadFragment(currencyDetailsFragment);
 
+                // TODO: remove the code below (useless)
                 /*Intent intent = new Intent(myContext, CurrencyDetails.class);
                 int id = mData.get(i).getId();
                 intent.putExtra(EXTRA_MESSAGE, id);
@@ -83,7 +84,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
 //        myViewHolder
     }
 
-    public void loadFragment (Fragment fragment)
+    private void loadFragment(Fragment fragment)
     {
         FragmentTransaction transaction = this.fragmentManager.beginTransaction();
         transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
@@ -94,7 +95,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
 
     /**
      * Gets the number of items that wil be displayed
-     * @return
+     * @return Integer
      */
     @Override
     public int getItemCount() {
@@ -104,7 +105,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     /**
      * Class which is used for the generic class Adapter
      */
-    public class myViewHolder extends RecyclerView.ViewHolder
+    class myViewHolder extends RecyclerView.ViewHolder
     {
         ImageView background_img;
         TextView symbol;
