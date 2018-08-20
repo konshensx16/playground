@@ -33,7 +33,6 @@
 - Clear the search results (recyclerView) when the EditText is empty (charSequence == 0) -~ fixed
 - Try to change the CurrencyDetails from an activity to a Fragment and load it in the FrameLayout -~ fixed
 - BUG: the titleBar is not changing back to the fragment title after accessing the one of the CurrencyDetails -~ fixed
-- Add a check for network connectivity (display Toast or notification if not connected) -~ doing
 - Add a back button to the currencyDetails fragment
 - BUG: Snackbar is shown behind the bottomNavigationBar -~ solved but not the way i wanted
     NOTES: the snackbar is always behind the bottom navigation no matter what i try
@@ -44,3 +43,4 @@
     08-13 14:27:33.499 5126-5126/com.example.konshensx.firstapp I/HomeFragment: onActivityCreated: executed, order matter
 
 - Add a loading indicator when loading the nextSet of Data from the API
+- Add a check for network connectivity (display Toast or notification if not connected) -~ doing

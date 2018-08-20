@@ -1,8 +1,12 @@
 package com.example.konshensx.firstapp;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
@@ -18,7 +22,6 @@ public class BitcoinIndex extends AppCompatActivity {
 
     BottomNavigationView navigation;
     ActionBar toolbar;
-    CoordinatorLayout coordinator_container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +37,23 @@ public class BitcoinIndex extends AppCompatActivity {
             setTitle("Vertex Tracker");
             // get the tools bar to set the name later based on the page im in
             toolbar = getSupportActionBar();
+
             //Remove notification bar
 //            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-            coordinator_container = findViewById(R.id.coordinator_container);
-
 
             navigation = findViewById(R.id.navigation);
+
 //            navigation.setVisibility(View.INVISIBLE);
-             navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+            navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
             CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
             layoutParams.setBehavior(new BottomNavigationBehavior());
 
+            // check if device is connected to the internet
+            if (!this.checkInternetConnection())
+            {
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.coordinator_container), "No internet connection", Snackbar.LENGTH_INDEFINITE);
+                snackbar.show();
+            }c
             loadFragment(new HomeFragment());
 
         }
@@ -92,6 +101,23 @@ public class BitcoinIndex extends AppCompatActivity {
         transaction.replace(R.id.frame_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+
+
+    /**
+     * Checks if device has access to internet
+     * @param context
+     * @return
+     */
+    private boolean checkInternetConnection()
+    {
+        ConnectivityManager cm =
+                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
     }
 
 }

@@ -1,5 +1,8 @@
 package com.example.konshensx.firstapp;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -61,12 +64,9 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
         recyclerView = getActivity().findViewById(R.id.rv_list);
 
 //        Create a basis snack bar and display it
-        Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.coordinator_container), "No internet connection", Snackbar.LENGTH_INDEFINITE);
-        snackbar.show();
-
-        Toast toast = Toast.makeText(getContext(), "isShown: " + snackbar.isShown(), Toast.LENGTH_LONG);
-        toast.show();
-
+//        // TODO: move this code to the BitcoinIndex activity
+//        Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.coordinator_container), "No internet connection", Snackbar.LENGTH_INDEFINITE);
+//        snackbar.show();
     }
 
     @Override
