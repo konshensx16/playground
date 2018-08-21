@@ -25,16 +25,16 @@
     - https://github.com/lgvalle/Material-Animations
     - So far achieved this just by using android predefined animations -~ fixed
 
-- Work on the recent searches functionality - DOING
+- Work on the recent searches functionality - POSTPONED
     - NOTES: this is going to a lil bit complicated in terms of logic so what i'm thinking
         about doing instead is just display the global values of the market in there
-        instead of recent search, it's almost 2AM which is not a great time to make decisions
+        instead of recent search, it's almost 2 A.M which is not a great time to make decisions
 
 - Clear the search results (recyclerView) when the EditText is empty (charSequence == 0) -~ fixed
 - Try to change the CurrencyDetails from an activity to a Fragment and load it in the FrameLayout -~ fixed
 - BUG: the titleBar is not changing back to the fragment title after accessing the one of the CurrencyDetails -~ fixed
 - Add a back button to the currencyDetails fragment
-- BUG: Snackbar is shown behind the bottomNavigationBar -~ solved but not the way i wanted
+- BUG: Snackbar is shown behind the bottomNavigationBar -~ fixed, but not the way i wanted
     NOTES: the snackbar is always behind the bottom navigation no matter what i try
             - Changing the size of both the frame_container and the navigation didn't help either
 - BUG: pressing back button in the currencyDetails takes to the homeFragment but doesn't load (Check logcat for errors)
@@ -42,5 +42,12 @@
     08-13 14:27:33.497 5126-5126/com.example.konshensx.firstapp I/HomeFragment: onCreateView: executed, order matter
     08-13 14:27:33.499 5126-5126/com.example.konshensx.firstapp I/HomeFragment: onActivityCreated: executed, order matter
 
-- Add a loading indicator when loading the nextSet of Data from the API
-- Add a check for network connectivity (display Toast or notification if not connected) -~ doing
+
+More to come:
+    
+☐ @high Add a loading indicator when loading the nextSet of Data from the API
+✔ Add a check for network connectivity (display Toast or notification if not connected) -~ fixed @done (8/20/2018, 8:00:19 PM)
+✘ Snackbar dismissed after clicking the action button, need to prevent this default behaviour @cancelled (8/20/2018, 7:59:07 PM)
+☐ @critical Show the snackbar after the clicking the button, if not connected to the internet of course 
+☐ @critical Need to check for internet connection when switching between fragments too.
+☐ Check for internet connection when switching between fragments, (maybe in the onCreateView)

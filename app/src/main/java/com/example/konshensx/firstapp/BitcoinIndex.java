@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
 
 public class BitcoinIndex extends AppCompatActivity {
@@ -51,10 +52,22 @@ public class BitcoinIndex extends AppCompatActivity {
             // check if device is connected to the internet
             if (!this.checkInternetConnection())
             {
-                Snackbar snackbar = Snackbar.make(findViewById(R.id.coordinator_container), "No internet connection", Snackbar.LENGTH_INDEFINITE);
+                final Snackbar snackbar = Snackbar.make(findViewById(R.id.coordinator_container), "No internet connection", Snackbar.LENGTH_INDEFINITE);
+                snackbar.setAction("Retry", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!BitcoinIndex.this.checkInternetConnection())
+                        {
+                            snackbar.show();
+                        } else {
+                            loadFragment(new HomeFragment());
+                        }
+                    }
+                });
                 snackbar.show();
-            }c
-            loadFragment(new HomeFragment());
+            } else {
+                loadFragment(new HomeFragment());
+            }
 
         }
         catch (Exception e)
@@ -64,7 +77,6 @@ public class BitcoinIndex extends AppCompatActivity {
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
@@ -103,21 +115,17 @@ public class BitcoinIndex extends AppCompatActivity {
         transaction.commit();
     }
 
-
-
     /**
      * Checks if device has access to internet
-     * @param context
      * @return
      */
-    private boolean checkInternetConnection()
+    public boolean checkInternetConnection()
     {
         ConnectivityManager cm =
                 (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
 }

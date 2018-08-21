@@ -1,8 +1,12 @@
 package com.example.konshensx.firstapp;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -64,11 +68,31 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
 
         getActivity().setTitle(getString(R.string.search_text));
 
-        // TODO: might need to check if the length != 0 (optimization)
-        // XXX: make the request to the API and search for the currencies
-        // URL: https://api.coinmarketcap.com/v2/listings/?sort=rank
-        // all result are always sorted by rank
-        new Fetcher(listener).execute("https://api.coinmarketcap.com/v2/listings/?sort=rank");
+        // TODO: check for internet connection
+        if (!this.checkInternetConnection()) {
+            // TODO: show a snackbar
+            final Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.coordinator_container), "No internet connection", Snackbar.LENGTH_INDEFINITE);
+            snackbar.setAction("Retry", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (!SearchFragment.this.checkInternetConnection())
+                    {
+                        snackbar.show();
+                    } else {
+                        new Fetcher(listener).execute("https://api.coinmarketcap.com/v2/listings/?sort=rank");
+                    }
+                }
+            });
+            snackbar.show();
+        } else {
+
+            // TODO: might need to check if the length != 0 (optimization)
+            // XXX: make the request to the API and search for the currencies
+            // URL: https://api.coinmarketcap.com/v2/listings/?sort=rank
+            // all result are always sorted by rank
+            new Fetcher(listener).execute("https://api.coinmarketcap.com/v2/listings/?sort=rank");
+        }
+
 
         currency_search_input.addTextChangedListener(new TextWatcher() {
             @Override
@@ -138,6 +162,7 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
     public void onTaskCompleted(String result, int statusCode) {
         // XXX: parse the jsonResponse (string) to objects and add them to the currencyList
         try {
+            // TODO: remove the logs
             Log.i(TAG, "onTaskCompleted: Response code from the API: " + statusCode);
             if (result != null) {
                 this.jsonResponse = result;
@@ -198,6 +223,19 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
         {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Checks if device has access to internet
+     * @return
+     */
+    public boolean checkInternetConnection()
+    {
+        ConnectivityManager cm =
+                (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
 }

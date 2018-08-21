@@ -99,6 +99,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
      */
     @Override
     public int getItemCount() {
+        // adding one for the loader at the bottom
+//        return mData.size() + 1;
         return mData.size();
     }
 

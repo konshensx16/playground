@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,13 +59,8 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         // trying to see if this is what's causing the slow starting of the fragment and the 429 status code (rate limit)
         super.onActivityCreated(savedInstanceState);
-//        try {
-        recyclerView = getActivity().findViewById(R.id.rv_list);
 
-//        Create a basis snack bar and display it
-//        // TODO: move this code to the BitcoinIndex activity
-//        Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.coordinator_container), "No internet connection", Snackbar.LENGTH_INDEFINITE);
-//        snackbar.show();
+        recyclerView = getActivity().findViewById(R.id.rv_list);
     }
 
     @Override
@@ -77,7 +71,26 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
             this.list = new ArrayList<>();
             adapter = new Adapter(getContext(), this.list, getActivity().getSupportFragmentManager());
 
-            new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank");
+            if (!this.checkInternetConnection()) {
+                // TODO: display a snackbar, not sure if i should just use the one in the BitcoinIndex or just create a new one ?
+                // Copying the code from BitcoinIndex for now
+                final Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.coordinator_container), "No internet connection", Snackbar.LENGTH_INDEFINITE);
+                snackbar.setAction("Retry", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!HomeFragment.this.checkInternetConnection())
+                        {
+                            snackbar.show();
+                        } else {
+                            new Fetcher(new HomeFragment()).execute("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank");
+                        }
+                    }
+                });
+                snackbar.show();
+            } else {
+                // TODO: this need to run when internet connection available
+                new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -162,8 +175,8 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
         }
         // Add the items to the list here instead of the onCreate method
         // setting the adapter to the recyclerView created
-        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
 
         scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
@@ -177,7 +190,7 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
                 view.post(new Runnable() {
                     @Override
                     public void run() {
-                        adapter.notifyItemChanged(list.size() - 1);
+                        adapter.notifyDataSetChanged();
                     }
                 });
             }
@@ -207,5 +220,18 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
         this.START_INDEX += LIMIT;
 
         return list;
+    }
+
+    /**
+     * Checks if device has access to internet
+     * @return
+     */
+    public boolean checkInternetConnection()
+    {
+        ConnectivityManager cm =
+                (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 }
