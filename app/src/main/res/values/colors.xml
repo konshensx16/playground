@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#8D87C4</color>
-    <color name="colorPrimaryDark">#3A2F63</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="bgBottomNavigation">#fe485a</color>
+    <!--dark mode colors -->
+    <color name="dark_colorPrimary">#8D87C4</color>
+    <color name="dark_colorPrimaryDark">#3A2F63</color>
+    <color name="dark_colorAccent">#FFFFFF</color>
+
+    <!-- light mode colors -->
+    <color name="light_colorPrimary">#FFFFFF</color>
+    <color name="light_colorPrimaryDark">#111111</color>
+    <color name="light_colorAccent">#1F8DFB</color>
+
+    <!-- common colors (for both light and dark) -->
+    <color name="green_color">#3AD084</color>
+    <color name="red_color">#F8748A</color>
+    <color name="grey_color">#e0e0e5</color>
+
 </resources>

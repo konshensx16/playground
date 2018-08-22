@@ -11,15 +11,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
-        <activity
-            android:name=".DisplayMessageActivity"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
+        android:theme="@style/ActivityTheme.Primary.Base.Light">
         <activity android:name=".BitcoinIndex">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +20,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".CardUI" />
-        <activity android:name=".CurrencyDetails" android:parentActivityName=".BitcoinIndex"></activity>
     </application>
 
 </manifest>

@@ -5,8 +5,7 @@
     <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_height="match_parent"
             android:layout_width="match_parent"
@@ -18,9 +17,10 @@
                 android:ems="10"
                 android:padding="10dp"
                 android:inputType="textPersonName"
-                android:background="@color/colorPrimary"
-                android:textColor="@android:color/white"
-                android:hint="@string/currency_search_input" />
+                android:background="?attr/colorPrimary"
+                android:textColor="?attr/colorPrimaryDark"
+                android:hint="@string/currency_search_input"
+                android:textColorHint="?attr/greyTextColor"/>
 
             <TextView
                 android:id="@+id/search_title_holder"
@@ -29,13 +29,12 @@
                 android:textSize="25sp"
                 android:padding="16dp"
                 android:text="@string/currency_recent_search"
-                android:textColor="@color/colorPrimary"/>
+                android:textColor="?attr/colorPrimaryDark"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/search_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
-                android:background="#3A2F63"
                 android:scrollbars="vertical"/>
 
 

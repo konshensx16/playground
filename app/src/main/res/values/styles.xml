@@ -1,11 +1,45 @@
 <resources>
 Dialog
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <!--<style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">-->
+        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+    <!--</style>-->
+
+    <!-- Light base activity theme -->
+    <style name="ActivityTheme.Primary.Base.Light" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/light_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/light_colorPrimaryDark</item>
+        <item name="accentColor">@color/light_colorAccent</item>
+        <item name="backgroundColor">@color/light_colorPrimaryDark</item>
+        <item name="greyTextColor">@color/grey_color</item>
+
+        <!-- styles for the card_item -->
+        <item name="cardBackgroundColor">@color/light_colorPrimary</item>
+        <item name="cardBorderColor">@color/grey_color</item>
+        <item name="cardPrimaryTextColor">@color/light_colorPrimaryDark</item>
+        <item name="cardSecondaryTextColor">@color/light_colorPrimaryDark</item>
+        <item name="greenTextColor">@color/green_color</item>
+        <item name="redTextColor">@color/red_color</item>
+
+    </style>
+
+    <!-- Dark base activity theme -->
+    <style name="ActivityTheme.Primary.Base.Dark" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/dark_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/dark_colorPrimaryDark</item>
+        <item name="accentColor">@color/light_colorAccent</item>
+        <item name="backgroundColor">@color/dark_colorPrimaryDark</item>
+        <item name="greyTextColor">@color/grey_color</item>
+
+        <!-- styles for the card_item -->
+        <item name="cardBackgroundColor">@color/dark_colorPrimaryDark</item>
+        <item name="cardPrimaryTextColor">@color/dark_colorPrimary</item>
+        <item name="cardSecondaryTextColor">@color/grey_color</item>
+        <item name="greenTextColor">@color/green_color</item>
+        <item name="redTextColor">@color/red_color</item>
     </style>
 
 </resources>

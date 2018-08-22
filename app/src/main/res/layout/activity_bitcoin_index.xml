@@ -6,7 +6,8 @@
     android:id="@+id/coordinator_container_root"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/colorPrimary">
 
     <android.support.design.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,8 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="56dp"
-        tools:context=".BitcoinIndex"
-        android:background="@color/colorPrimaryDark">
+        tools:context=".BitcoinIndex">
 
         <FrameLayout
             android:id="@+id/frame_container"
@@ -35,9 +35,9 @@
     android:layout_gravity="bottom"
     android:background="?android:attr/windowBackground"
     android:foreground="?attr/selectableItemBackground"
-    app:itemBackground="@color/colorPrimaryDark"
-    app:itemIconTint="@color/colorPrimary"
-    app:itemTextColor="@color/colorPrimary"
+    app:itemBackground="?attr/colorPrimary"
+    app:itemIconTint="?attr/accentColor"
+    app:itemTextColor="?attr/accentColor"
     app:menu="@menu/navigation" />
 
 </android.support.design.widget.CoordinatorLayout>
