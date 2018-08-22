@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--dark mode colors -->
-    <color name="dark_colorPrimary">#8D87C4</color>
-    <color name="dark_colorPrimaryDark">#3A2F63</color>
-    <color name="dark_colorAccent">#FFFFFF</color>
 
-    <!-- light mode colors -->
-    <color name="light_colorPrimary">#FFFFFF</color>
-    <color name="light_colorPrimaryDark">#111111</color>
-    <color name="light_colorAccent">#1F8DFB</color>
+    <!-- dark mode colors -->
+    <color name="dark_primaryBackgroundColor">#29253C</color>
+    <color name="dark_secondaryBackgroundColor">#423D5D</color>
+    <color name="dark_primaryTextColor">#FFFFFF</color>
+    <color name="dark_secondaryTextColor">#9899AF</color>
+    <color name="dark_accentColor">#4492D8</color>
+
+    <!--light mode colors -->
+    <color name="light_primaryBackgroundColor">#e5e5ff</color>
+    <color name="light_secondaryBackgroundColor">#FFFFFF</color>
+    <color name="light_primaryTextColor">#4A485A</color>
+    <color name="light_secondaryTextColor">#C3C5CE</color>
+    <color name="light_accentColor">#4492D8</color>
 
     <!-- common colors (for both light and dark) -->
     <color name="green_color">#3AD084</color>

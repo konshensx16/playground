@@ -17,10 +17,10 @@
                 android:ems="10"
                 android:padding="10dp"
                 android:inputType="textPersonName"
-                android:background="?attr/colorPrimary"
-                android:textColor="?attr/colorPrimaryDark"
+                android:background="?attr/primaryBackgroundColor"
+                android:textColor="?attr/primaryTextColor"
                 android:hint="@string/currency_search_input"
-                android:textColorHint="?attr/greyTextColor"/>
+                android:textColorHint="?attr/secondaryTextColor"/>
 
             <TextView
                 android:id="@+id/search_title_holder"

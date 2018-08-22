@@ -66,11 +66,49 @@ LIGHT MODE:
     ☐ BottomNavigation colors are inverted and more suitable for dark mode than light mode
 
 DARK MODE:
-
+☐ Most colors are inverted, this is normal since i changed everything for the sake of light mode
+✔ HomeFragment: background color and text color are reversed, invert the names and see if that's a solution(styles.xml) @done (8/22/2018, 6:45:06 PM)
+✔ BottonNavigation accent color not changing from light to dark @done (8/22/2018, 6:46:43 PM)
+☐ Card_item background needs to be a lighter color than the background same as the bg
+☐ card_item colors are a mess, need to change them to match dark mode
 
 
 NOTES:
 Need to work on the light design of the app, the dark is already defined and i have a good presentation of whats going to look like
 Light version: i want to rise the cards and give then a shadow effect but so far didn't get any hope of success, might need to do something
 else instead of shadow and be done with this, or atleast just ignore it and focus on what matters more
-☐ @critical Still years to load the cards, 28sec for API to respond 
+☐ @critical Still years to load the cards, 28sec for API to respond (67286ms)
+
+☐ @critical NEED TO RECREATE THE ENTIRE DESIGN OF THE LIGHT AND DARK MODE, A LOT OF INCONSISTENCY
+    might as well just use this onem or keep searching, i like those colors
+    ✔ Get the colors out for the background and the text @done (8/22/2018, 11:28:15 PM)
+    ✔ Replace the colors in the colors.xml & attrs.xml & styles.xml @done (8/23/2018, 12:01:46 AM)
+        ✔ colors.xml @done (8/22/2018, 11:35:04 PM)
+        ✔ attrs.xml @done (8/22/2018, 11:35:05 PM)
+        ✔ styles.xml @done (8/23/2018, 12:01:43 AM)
+    ✔ Card styling: @done (8/23/2018, 12:01:42 AM)
+        ✔ background of the card @done (8/23/2018, 12:01:34 AM)
+        ✔ border of the card @done (8/23/2018, 12:01:35 AM)
+        ✔ primary text color which is the currency name @done (8/23/2018, 12:01:36 AM)
+        ✔ secondary text color which is the currency symbol @done (8/23/2018, 12:01:36 AM)
+        ✔ accent color for the price @done (8/23/2018, 12:01:37 AM)
+        ✔ green or red value based on the whether value increased or decreased @done (8/23/2018, 12:01:38 AM)
+    ☐ change the temp value of accent color for both searchFragment and settingFragment after everything is working properly
+    ☐ currency details page needs to have light and dark mode too, main thing is the background image
+    ☐ i really need the cards to drop a shadow to give depth to the UI, right now everything looks horrible and white
+
+NEW COLORS:
+    So far i'll just stop assuming and i'll try to get as many colors as i can from the image in the following link
+    https://dribbble.com/shots/4870942-Financial-iOS-App-Design-Stats-Screen-Dark-Light
+    LIGHT: 
+        Primary background color: #29253C
+        Secondary background color: #423D5D
+        Primary text color: #FFFFFF
+        Secondary text color: #9899AF
+        Accent color: #4492D8
+    DARK:
+        Primary background color: #F6F6FE
+        Secondary background color: #FFFFFF
+        Primary text color: #4A485A
+        Secondary text color: #C3C5CE
+        Accent color: #FFFFFF

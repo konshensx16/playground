@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="VertexTheme">
-        <attr name="colorPrimary" format="color"/>
-        <attr name="colorPrimaryDark" format="color"/>
+        <attr name="primaryBackgroundColor" format="color"/>
+        <attr name="secondaryBackgroundColor" format="color"/>
+        <attr name="primaryTextColor" format="color"/>
+        <attr name="secondaryTextColor" format="color"/>
         <attr name="accentColor" format="color"/>
-        <attr name="backgroundColor" format="color"/>
+
+        <!-- card attrs -->
         <attr name="cardBackgroundColor" format="color"/>
         <attr name="cardBorderColor" format="color"/>
         <attr name="cardPrimaryTextColor" format="color"/>
         <attr name="cardSecondaryTextColor" format="color"/>
-        <attr name="greenTextColor" format="color"/>
-        <attr name="redTextColor" format="color"/>
-        <attr name="greyTextColor" format="color"/>
+        <attr name="cardAccentTextColor" format="color"/>
     </declare-styleable>
 </resources>

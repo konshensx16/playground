@@ -7,7 +7,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="?attr/colorPrimary">
+    android:background="?attr/primaryBackgroundColor">
 
     <android.support.design.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,7 +22,7 @@
         <FrameLayout
             android:id="@+id/frame_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
@@ -35,7 +35,7 @@
     android:layout_gravity="bottom"
     android:background="?android:attr/windowBackground"
     android:foreground="?attr/selectableItemBackground"
-    app:itemBackground="?attr/colorPrimary"
+    app:itemBackground="?attr/primaryBackgroundColor"
     app:itemIconTint="?attr/accentColor"
     app:itemTextColor="?attr/accentColor"
     app:menu="@menu/navigation" />
