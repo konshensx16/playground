@@ -48,6 +48,7 @@ More to come:
 ☐ @high Add a loading indicator when loading the nextSet of Data from the API
 ✔ Add a check for network connectivity (display Toast or notification if not connected) -~ fixed @done (8/20/2018, 8:00:19 PM)
 ✘ Snackbar dismissed after clicking the action button, need to prevent this default behaviour @cancelled (8/20/2018, 7:59:07 PM)
-☐ @critical Show the snackbar after the clicking the button, if not connected to the internet of course 
-☐ @critical Need to check for internet connection when switching between fragments too.
-☐ Check for internet connection when switching between fragments, (maybe in the onCreateView)
+☐ @critical Show the snackbar again after clicking the action button, if not connected to the internet of course
+✔ @critical Need to check for internet connection when switching between fragments too. @done (8/21/2018, 10:29:38 AM)
+✔ @low create a switch for light mode and dark mode in settings (design wise) @done (8/22/2018, 11:25:03 AM)
+☐ handle the change of state of the switch 

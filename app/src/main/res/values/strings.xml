@@ -19,4 +19,5 @@
     <string name="name_text">Name</string>
     <string name="currency_details_text">CURRENCY DETAILS</string>
     <string name="search_title_holder">Searching for <b>%1$s</b>, displaying <b>%2$d</b> results</string>
+    <string name="setting_light_mode">Light Mode</string>
 </resources>

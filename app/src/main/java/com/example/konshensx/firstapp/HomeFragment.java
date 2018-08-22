@@ -71,15 +71,17 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
             this.list = new ArrayList<>();
             adapter = new Adapter(getContext(), this.list, getActivity().getSupportFragmentManager());
 
+            // not connected to the internet, display snackbar to the user
             if (!this.checkInternetConnection()) {
-                // TODO: display a snackbar, not sure if i should just use the one in the BitcoinIndex or just create a new one ?
-                // Copying the code from BitcoinIndex for now
                 final Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.coordinator_container), "No internet connection", Snackbar.LENGTH_INDEFINITE);
                 snackbar.setAction("Retry", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if (!HomeFragment.this.checkInternetConnection())
                         {
+                            // TODO; read comments below
+                            // not sure if this is needed anymore, might delete later
+                            // or maybe i should dismiss the snackbar to null it ??
                             snackbar.show();
                         } else {
                             new Fetcher(new HomeFragment()).execute("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank");
@@ -91,7 +93,6 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
                 // TODO: this need to run when internet connection available
                 new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank");
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

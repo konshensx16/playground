@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 
 public class BitcoinIndex extends AppCompatActivity {
+    private static final String TAG = "BitcoinIndex class";
 //    public static final String EXTRA_MESSAGE = "com.example.konshensx.firstapp.MESSAGE";
 
     BottomNavigationView navigation;
@@ -48,6 +50,7 @@ public class BitcoinIndex extends AppCompatActivity {
             navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
             CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigation.getLayoutParams();
             layoutParams.setBehavior(new BottomNavigationBehavior());
+
 
             // check if device is connected to the internet
             if (!this.checkInternetConnection())
