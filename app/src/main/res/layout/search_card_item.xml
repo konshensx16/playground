@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:background="?attr/primaryBackgroundColor"
     tools:context=".CardUI"
     app:srcCompat="@drawable/rounded"
     >
@@ -24,13 +23,16 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:outlineProvider="bounds"
+        android:elevation="2dp"
+        android:translationZ="2dp" />
 
     <ImageView
+        android:elevation="7dp"
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="96dp"
-        android:elevation="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,13 +40,13 @@
 
 
     <TextView
+        android:elevation="7dp"
         android:id="@+id/search_card_symbol"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:elevation="12dp"
+        android:layout_marginTop="8dp" 
         android:fontFamily="sans-serif-condensed"
         android:text="@string/loading_text"
         android:textColor="?attr/primaryTextColor"
@@ -54,6 +56,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
     <TextView
+        android:elevation="7dp"
         android:id="@+id/search_card_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -69,12 +72,12 @@
         app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
     <TextView
+        android:elevation="7dp"
         android:id="@+id/search_card_website_slug"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:layout_marginStart="16dp"
-        android:elevation="12dp"
         android:fontFamily="sans-serif-condensed"
         android:text="Loading ..."
         android:textColor="?attr/secondaryTextColor"

@@ -95,7 +95,8 @@ else instead of shadow and be done with this, or atleast just ignore it and focu
         ✔ green or red value based on the whether value increased or decreased @done (8/23/2018, 12:01:38 AM)
     ☐ change the temp value of accent color for both searchFragment and settingFragment after everything is working properly
     ☐ currency details page needs to have light and dark mode too, main thing is the background image
-    ☐ i really need the cards to drop a shadow to give depth to the UI, right now everything looks horrible and white
+    ✔ i really need the cards to drop a shadow to give depth to the UI, right now everything looks horrible and white @done (8/23/2018, 12:27:41 AM)
+        currenctly using an elevation of 5 and translationZ of 5 as well
 
 NEW COLORS:
     So far i'll just stop assuming and i'll try to get as many colors as i can from the image in the following link

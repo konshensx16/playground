@@ -9,14 +9,15 @@
             >
             <stroke
                 android:width="2dp"
-                android:color="#cccccc"
+                android:color="?attr/primaryBackgroundColor"
                 />
             <corners
-                android:radius="10dp"
+                android:radius="7dp"
                 />
             <padding android:bottom="10dp" android:left="10dp" android:right="10dp" android:top="10dp"
                 />
-            <solid android:color="?attr/cardBackgroundColor" />
+            <solid
+                android:color="?attr/primaryBackgroundColor" />
         </shape>
     </item>
 </layer-list>

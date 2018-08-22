@@ -9,7 +9,7 @@
     <color name="dark_accentColor">#4492D8</color>
 
     <!--light mode colors -->
-    <color name="light_primaryBackgroundColor">#e5e5ff</color>
+    <color name="light_primaryBackgroundColor">#f5f5ff</color>
     <color name="light_secondaryBackgroundColor">#FFFFFF</color>
     <color name="light_primaryTextColor">#4A485A</color>
     <color name="light_secondaryTextColor">#C3C5CE</color>
