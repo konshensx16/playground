@@ -117,7 +117,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
 
         public myViewHolder(View itemView) {
             super(itemView);
-            background_img = itemView.findViewById(R.id.background_img);
             symbol = itemView.findViewById(R.id.symbol);
             name = itemView.findViewById(R.id.name);
             price = itemView.findViewById(R.id.price);

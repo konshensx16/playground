@@ -100,12 +100,19 @@ else instead of shadow and be done with this, or atleast just ignore it and focu
 ☐ HomeFragment:
     ✔ Change the elevation and translationZ to 1dp, as usual it might change later @done (8/23/2018, 12:41:06 PM)
     ☐ Rounded corners not taken in consideration when dropping shadow, it drops the shape of the rectangle
+    ✔ @critical Change the card_item.xml from an image to a card, not really sure if i want to do this but, i might try (possible fix for the shadow problem) @done (8/23/2018, 1:40:23 PM)
+        Cards are definetely a better solution, fucking youtube and their shitty suggestions 
+    
+
+
 ☐ SearchFragment:
-    ✔ EditText needs to drop shadow for better UI (instead if border) @done (8/23/2018, 12:21:59 PM)
+    ✔ EditText needs to drop shadow for better UI (instead if border) @done (8/23/2018, 12:51:35 PM)
     ✘ Maybe put the search result inside a card and drop shadow too @cancelled (8/23/2018, 12:29:40 PM)
     ✔ Search result text neesd to match the colors of the UI (styles) @done (8/23/2018, 12:33:37 PM)
-    ☐ Display a message "No results found" when no matched results available
+    ✔ Display a message "No results found" when no matched results available @done (8/23/2018, 12:51:34 PM)
     ✔ Search cards elevation and translationZ needs to match home_layout cards @done (8/23/2018, 12:40:59 PM)
+    ☐ Change the search card items from an image to CardView
+
 ☐ SettingFragment:
     ☐ Add a card for every option of the options
     ✔ Get rid of the accent color of the text , use primary text color instead @done (8/23/2018, 12:42:30 PM)

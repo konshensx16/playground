@@ -8,80 +8,150 @@
     app:srcCompat="@drawable/rounded"
     >
 
-    <ImageView
-        android:id="@+id/background_img"
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/rounded"
-        android:scaleType="centerCrop"
+        android:background="?attr/primaryBackgroundColor"
+        app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        android:outlineProvider="bounds"
-        android:elevation="1dp"
-        android:translationZ="1dp" />
+        android:elevation="2dp"
+        android:translationZ="2dp">
 
-    <ImageView
-        android:elevation="7dp"
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="96dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/primaryBackgroundColor">
+
+            <TextView
+                android:id="@+id/search_card_symbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:elevation="7dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="@string/loading_text"
+                android:textColor="?attr/primaryTextColor"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/search_card_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:elevation="7dp"
+                android:text="@string/price_text"
+                android:textAlignment="textEnd"
+                android:textColor="?attr/accentColor"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/search_card_symbol"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/search_card_website_slug"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:elevation="7dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Loading ..."
+                android:textColor="?attr/secondaryTextColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_card_symbol" />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <!--<ImageView-->
+        <!--android:id="@+id/background_img"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:background="@drawable/rounded"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintVertical_bias="0.0"-->
+        <!--android:outlineProvider="bounds"-->
+        <!--android:elevation="1dp"-->
+        <!--android:translationZ="1dp" />-->
+
+    <!--<ImageView-->
+        <!--android:elevation="7dp"-->
+        <!--android:id="@+id/imageView2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="96dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--/>-->
 
 
-    <TextView
-        android:elevation="7dp"
-        android:id="@+id/search_card_symbol"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp" 
-        android:fontFamily="sans-serif-condensed"
-        android:text="@string/loading_text"
-        android:textColor="?attr/primaryTextColor"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/name"
-        app:layout_constraintStart_toStartOf="@+id/background_img"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+    <!--<TextView-->
+        <!--android:elevation="7dp"-->
+        <!--android:id="@+id/search_card_symbol"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:layout_marginTop="8dp" -->
+        <!--android:fontFamily="sans-serif-condensed"-->
+        <!--android:text="@string/loading_text"-->
+        <!--android:textColor="?attr/primaryTextColor"-->
+        <!--android:textSize="25sp"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/name"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/background_img"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/imageView2" />-->
 
-    <TextView
-        android:elevation="7dp"
-        android:id="@+id/search_card_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/price_text"
-        android:textAlignment="textEnd"
-        android:textColor="?attr/accentColor"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="@+id/background_img"
-        app:layout_constraintStart_toEndOf="@+id/symbol"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+    <!--<TextView-->
+        <!--android:elevation="7dp"-->
+        <!--android:id="@+id/search_card_name"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:text="@string/price_text"-->
+        <!--android:textAlignment="textEnd"-->
+        <!--android:textColor="?attr/accentColor"-->
+        <!--android:textSize="25sp"-->
+        <!--app:layout_constraintEnd_toEndOf="@+id/background_img"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/symbol"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/imageView2" />-->
 
-    <TextView
-        android:elevation="7dp"
-        android:id="@+id/search_card_website_slug"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginStart="16dp"
-        android:fontFamily="sans-serif-condensed"
-        android:text="Loading ..."
-        android:textColor="?attr/secondaryTextColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/background_img" />
+    <!--<TextView-->
+        <!--android:elevation="7dp"-->
+        <!--android:id="@+id/search_card_website_slug"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="32dp"-->
+        <!--android:layout_marginStart="16dp"-->
+        <!--android:fontFamily="sans-serif-condensed"-->
+        <!--android:text="Loading ..."-->
+        <!--android:textColor="?attr/secondaryTextColor"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/background_img" />-->
 
 </android.support.constraint.ConstraintLayout>
