@@ -108,7 +108,7 @@ else instead of shadow and be done with this, or atleast just ignore it and focu
     ✔ Search cards elevation and translationZ needs to match home_layout cards @done (8/23/2018, 12:40:59 PM)
 ☐ SettingFragment:
     ☐ Add a card for every option of the options
-    ☐ Get rid of the accent color of the text , use primary text color instead
+    ✔ Get rid of the accent color of the text , use primary text color instead @done (8/23/2018, 12:42:30 PM)
 
 NEW COLORS:
     So far i'll just stop assuming and i'll try to get as many colors as i can from the image in the following link

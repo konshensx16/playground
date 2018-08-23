@@ -125,7 +125,15 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
                     // Set the search_title_holder to what the user is searching for
                     if (charSequence.length() > 0)
                     {
-                        String title_holder = getString(R.string.search_title_holder, charSequence, searchList.size());
+                        String title_holder;
+                        // TODO: if no results were found display a no results found message
+                        if (searchList.size() == 0) {
+                            // list is empty
+                            title_holder = getString(R.string.search_title_no_results, charSequence);
+                        } else {
+                            title_holder = getString(R.string.search_title_holder, charSequence, searchList.size());
+
+                        }
                         search_title_holer.setText(title_holder);
                     } else {
                         // clear the search list when the EditText is empty
