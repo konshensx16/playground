@@ -13,5 +13,8 @@
         <attr name="cardPrimaryTextColor" format="color"/>
         <attr name="cardSecondaryTextColor" format="color"/>
         <attr name="cardAccentTextColor" format="color"/>
+
+        <!-- currency details background image -->
+        <attr name="currency_details_background_image" format="integer" />
     </declare-styleable>
 </resources>

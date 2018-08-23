@@ -23,6 +23,9 @@
         <item name="cardSecondaryTextColor">@color/light_secondaryTextColor</item>
         <item name="cardAccentTextColor">@color/light_accentColor</item>
 
+        <!-- currency details background image -->
+        <item name="currency_details_background_image">@drawable/details_light</item>
+
     </style>
 
     <!-- Dark base activity theme -->
@@ -40,6 +43,10 @@
         <item name="cardPrimaryTextColor">@color/dark_primaryTextColor</item>
         <item name="cardSecondaryTextColor">@color/dark_secondaryTextColor</item>
         <item name="cardAccentTextColor">@color/dark_accentColor</item>
+
+
+        <!-- currency details background image -->
+        <item name="currency_details_background_image">@drawable/details_dark</item>
     </style>
 
 </resources>

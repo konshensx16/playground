@@ -90,7 +90,6 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
                 });
                 snackbar.show();
             } else {
-                // TODO: this need to run when internet connection available
                 new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank");
             }
         } catch (Exception e) {

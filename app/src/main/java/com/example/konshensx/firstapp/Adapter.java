@@ -73,15 +73,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
                 CurrencyDetails currencyDetailsFragment = CurrencyDetails.newInstance(mData.get(i).getId());
                 loadFragment(currencyDetailsFragment);
 
-                // TODO: remove the code below (useless)
-                /*Intent intent = new Intent(myContext, CurrencyDetails.class);
-                int id = mData.get(i).getId();
-                intent.putExtra(EXTRA_MESSAGE, id);
-                myContext.startActivity(intent);
-                */
             }
         });
-//        myViewHolder
     }
 
     private void loadFragment(Fragment fragment)
