@@ -8,7 +8,7 @@
     <!--</style>-->
 
     <!-- Light base activity theme -->
-    <style name="ActivityTheme.Primary.Base.Light" parent="Theme.AppCompat.NoActionBar">
+    <style name="ActivityTheme.Primary.Base.Light" parent="Theme.AppCompat.DayNight">
 
         <item name="primaryBackgroundColor">@color/light_primaryBackgroundColor</item>
         <item name="secondaryBackgroundColor">@color/light_secondaryBackgroundColor</item>
@@ -29,7 +29,7 @@
     </style>
 
     <!-- Dark base activity theme -->
-    <style name="ActivityTheme.Primary.Base.Dark" parent="Theme.AppCompat.NoActionBar">
+    <style name="ActivityTheme.Primary.Base.Dark" parent="Theme.AppCompat.DayNight">
 
         <item name="primaryBackgroundColor">@color/dark_primaryBackgroundColor</item>
         <item name="secondaryBackgroundColor">@color/dark_secondaryBackgroundColor</item>

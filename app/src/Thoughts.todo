@@ -103,23 +103,27 @@ else instead of shadow and be done with this, or atleast just ignore it and focu
     ✔ @critical Change the card_item.xml from an image to a card, not really sure if i want to do this but, i might try (possible fix for the shadow problem) @done (8/23/2018, 1:40:23 PM)
         Cards are definetely a better solution, fucking youtube and their shitty suggestions 
     
-
-
-☐ SearchFragment:
+✔ SearchFragment: @done (8/23/2018, 3:17:41 PM)
     ✔ EditText needs to drop shadow for better UI (instead if border) @done (8/23/2018, 12:51:35 PM)
     ✘ Maybe put the search result inside a card and drop shadow too @cancelled (8/23/2018, 12:29:40 PM)
     ✔ Search result text neesd to match the colors of the UI (styles) @done (8/23/2018, 12:33:37 PM)
     ✔ Display a message "No results found" when no matched results available @done (8/23/2018, 12:51:34 PM)
     ✔ Search cards elevation and translationZ needs to match home_layout cards @done (8/23/2018, 12:40:59 PM)
-    ☐ Change the search card items from an image to CardView
+    ✔ Change the search card items from an image to CardView @done (8/23/2018, 3:17:39 PM)
 
 ☐ SettingFragment:
+    if i can make the night/light mode work just during the life of the app that'd be more than enought for now
     ☐ Add a card for every option of the options
     ✔ Get rid of the accent color of the text , use primary text color instead @done (8/23/2018, 12:42:30 PM)
+    ☐ Handle the switching between light and dark mode
+        ☐ setDefaultNightMode is not setting the state, need to check where the value is being stored
+        ☐ Fragments not destroyed when calling Activity.recreate(): 
+            https://stackoverflow.com/questions/26849905/fragments-not-destroyed-when-recreate-activity
+        ☐ I might need to incude a TAG with each fragment being created (tag will be used later for search and destroy)
 
-☐ CurrencyDetailFragment:
+✔ CurrencyDetailFragment: @done (8/23/2018, 4:47:23 PM)
     ✔ Create the light and dark version of the backgorund @done (8/23/2018, 3:03:18 PM)
-    ☐ Change the colors of textView and such to use attrs
+    ✔ Change the colors of textView and such to use attrs @done (8/23/2018, 3:17:33 PM)
 
 NEW COLORS:
     So far i'll just stop assuming and i'll try to get as many colors as i can from the image in the following link
@@ -136,3 +140,14 @@ NEW COLORS:
         Primary text color: #4A485A
         Secondary text color: #C3C5CE
         Accent color: #FFFFFFmo
+
+
+
+
+USB flash 
+USB hard disk drive *
+USB internal oprical dirve
+Floppy disk drive 
+USB optical drive
+Internal hard disk drive
+Network

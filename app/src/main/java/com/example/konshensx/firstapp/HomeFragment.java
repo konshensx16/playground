@@ -67,6 +67,7 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
+            getActivity().setTitle("Vertex Tracker");
             linearLayoutManager = new LinearLayoutManager(getContext());
             this.list = new ArrayList<>();
             adapter = new Adapter(getContext(), this.list, getActivity().getSupportFragmentManager());
@@ -233,5 +234,13 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    }
+
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy: HomeFragment was destroyed");
     }
 }

@@ -190,7 +190,6 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
             JSONArray dataArray = jsonObject.getJSONArray("data");
 
             // iterate over the data objects
-
             for (int index = 0; index < dataArray.length(); index++)
             {
                 JSONObject dataArrayObject = dataArray.getJSONObject(index);
@@ -246,4 +245,9 @@ public class SearchFragment extends Fragment implements OnTaskCompleted{
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy: SearchFragment was destroyed");
+    }
 }

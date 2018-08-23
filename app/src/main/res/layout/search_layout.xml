@@ -36,7 +36,11 @@
                     android:textSize="25sp"
                     android:padding="16dp"
                     android:text="@string/currency_recent_search"
-                    android:textColor="?attr/primaryTextColor"/>
+                    android:textColor="?attr/primaryTextColor"
+                    android:outlineProvider="bounds"
+                    android:elevation="1dp"
+                    android:translationZ="1dp"
+                    />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/search_recyclerView"

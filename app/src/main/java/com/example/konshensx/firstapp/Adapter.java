@@ -71,18 +71,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
                 Log.d(TAG, "onClick: clicked");
                 // replace this with a fragment instead of an activity
                 CurrencyDetails currencyDetailsFragment = CurrencyDetails.newInstance(mData.get(i).getId());
-                loadFragment(currencyDetailsFragment);
+                loadFragment(currencyDetailsFragment, "currencyDetails");
 
             }
         });
     }
 
-    private void loadFragment(Fragment fragment)
+    private void loadFragment(Fragment fragment, String tag)
     {
         FragmentTransaction transaction = this.fragmentManager.beginTransaction();
         transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         transaction.replace(R.id.frame_container, fragment, "fragment");
-        transaction.addToBackStack(null);
+        transaction.addToBackStack(tag);
         transaction.commit();
     }
 
