@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
-                android:textColor="?attr/accentColor"
+                android:textColor="?attr/primaryTextColor"
                 android:text="@string/setting_light_mode" />
 
             <android.support.v7.widget.SwitchCompat
