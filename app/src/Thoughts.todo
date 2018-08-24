@@ -66,20 +66,20 @@ LIGHT MODE:
     ☐ BottomNavigation colors are inverted and more suitable for dark mode than light mode
 
 DARK MODE:
-☐ Most colors are inverted, this is normal since i changed everything for the sake of light mode
+✘ Most colors are inverted, this is normal since i changed everything for the sake of light mode @cancelled (8/24/2018, 7:04:27 PM)
 ✔ HomeFragment: background color and text color are reversed, invert the names and see if that's a solution(styles.xml) @done (8/22/2018, 6:45:06 PM)
 ✔ BottonNavigation accent color not changing from light to dark @done (8/22/2018, 6:46:43 PM)
-☐ Card_item background needs to be a lighter color than the background same as the bg
-☐ card_item colors are a mess, need to change them to match dark mode
+✘ Card_item background needs to be a lighter color than the background same as the bg @cancelled (8/24/2018, 7:04:29 PM)
+✘ card_item colors are a mess, need to change them to match dark mode @cancelled (8/24/2018, 7:04:30 PM)
 
 
 NOTES:
 Need to work on the light design of the app, the dark is already defined and i have a good presentation of whats going to look like
 Light version: i want to rise the cards and give then a shadow effect but so far didn't get any hope of success, might need to do something
 else instead of shadow and be done with this, or atleast just ignore it and focus on what matters more
-☐ @critical Still years to load the cards, 28sec for API to respond (67286ms)
+✔ @critical Still years to load the cards, 28sec for API to respond (67286ms) @done (8/24/2018, 7:04:19 PM)
 
-☐ @critical NEED TO RECREATE THE ENTIRE DESIGN OF THE LIGHT AND DARK MODE, A LOT OF INCONSISTENCY
+✔ @critical NEED TO RECREATE THE ENTIRE DESIGN OF THE LIGHT AND DARK MODE, A LOT OF INCONSISTENCY @done (8/24/2018, 7:04:22 PM)
     might as well just use this one or keep searching, i like those colors
     ✔ Get the colors out for the background and the text @done (8/22/2018, 11:28:15 PM)
     ✔ Replace the colors in the colors.xml & attrs.xml & styles.xml @done (8/23/2018, 12:01:46 AM)
@@ -94,12 +94,12 @@ else instead of shadow and be done with this, or atleast just ignore it and focu
         ✔ accent color for the price @done (8/23/2018, 12:01:37 AM)
         ✔ green or red value based on the whether value increased or decreased @done (8/23/2018, 12:01:38 AM)
     ✔ change the temp value of accent color for both searchFragment and settingFragment after everything is working properly @done (8/23/2018, 12:41:56 PM)
-    ☐ currency details page needs to have light and dark mode too, main thing is the background image
+    ✔ currency details page needs to have light and dark mode too, main thing is the background image @done (8/24/2018, 7:04:13 PM)
     ✔ i really need the cards to drop a shadow to give depth to the UI, right now everything looks horrible and white @done (8/23/2018, 12:27:41 AM)
         currenctly using an elevation of 5 and translationZ of 5 as well
-☐ HomeFragment:
+✔ HomeFragment: @done (8/24/2018, 7:04:12 PM)
     ✔ Change the elevation and translationZ to 1dp, as usual it might change later @done (8/23/2018, 12:41:06 PM)
-    ☐ Rounded corners not taken in consideration when dropping shadow, it drops the shape of the rectangle
+    ✘ Rounded corners not taken in consideration when dropping shadow, it drops the shape of the rectangle @cancelled (8/24/2018, 7:04:10 PM)
     ✔ @critical Change the card_item.xml from an image to a card, not really sure if i want to do this but, i might try (possible fix for the shadow problem) @done (8/23/2018, 1:40:23 PM)
         Cards are definetely a better solution, fucking youtube and their shitty suggestions 
     
@@ -111,7 +111,7 @@ else instead of shadow and be done with this, or atleast just ignore it and focu
     ✔ Search cards elevation and translationZ needs to match home_layout cards @done (8/23/2018, 12:40:59 PM)
     ✔ Change the search card items from an image to CardView @done (8/23/2018, 3:17:39 PM)
 
-☐ SettingFragment:
+✔ SettingFragment: @done (8/24/2018, 7:04:01 PM)
     if i can make the night/light mode work just during the life of the app that'd be more than enought for now
     ✔ Add a card for every option of the options @done (8/24/2018, 11:35:37 AM)
     ✔ Get rid of the accent color of the text , use primary text color instead @done (8/23/2018, 12:42:30 PM)
@@ -129,13 +129,15 @@ else instead of shadow and be done with this, or atleast just ignore it and focu
             ✔ HomeFragment first @done (8/24/2018, 3:24:19 PM)
                 ✔ Change the API to include teh display currency @done (8/24/2018, 3:17:15 PM)
                 ✔ Construct the string first then pass it the execute method @done (8/24/2018, 3:17:16 PM)
-    ✔ Might need to create a singleton to fetch the value at each fragment without rewriting the entire code @done (8/24/2018, 12:59:24 PM)
-    ☐ Change the display currency in the view as well (textViews)
+    ✘ Might need to create a singleton to fetch the value at each fragment without rewriting the entire code @cancelled (8/24/2018, 6:29:20 PM)
     ✔ Load the display currency in the settings fragment @done (8/24/2018, 3:24:15 PM)
-    ☐ Cards are not adapting to light and dark mode
-
-
+    ✔ Cards are not adapting to light and dark mode @done (8/24/2018, 6:28:43 PM)
+    
+    
 ✔ CurrencyDetailFragment: @done (8/23/2018, 4:47:23 PM)
+    ✔ BTC currency not displaying right values(currency details) @done (8/24/2018, 7:03:55 PM)
+    ✔ Update the link to includ the display currency @done (8/24/2018, 7:03:56 PM)
+    ✔ Change the display currency in the view as well (textViews) @done (8/24/2018, 6:29:12 PM)
     ✔ Create the light and dark version of the backgorund @done (8/23/2018, 3:03:18 PM)
     ✔ Change the colors of textView and such to use attrs @done (8/23/2018, 3:17:33 PM)
 
@@ -154,14 +156,3 @@ NEW COLORS:
         Primary text color: #4A485A
         Secondary text color: #C3C5CE
         Accent color: #FFFFFFmo
-
-
-
-
-USB flash 
-USB hard disk drive *
-USB internal oprical dirve
-Floppy disk drive 
-USB optical drive
-Internal hard disk drive
-Network

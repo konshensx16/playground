@@ -2,7 +2,6 @@ package com.example.konshensx.firstapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -31,7 +30,8 @@ public class SettingFragment extends Fragment implements CompoundButton.OnChecke
     SwitchCompat darkModeSwitch;
     Spinner currenciesSpinner;
     CoordinatorLayout coordinator_container;
-    Snackbar snackbar;
+    Snackbar snackbar,
+            savedChangedSnackbar;
 
     ArrayAdapter<CharSequence> charSequenceArrayAdapter;
     SharedPreferences sharedPreferences;
@@ -43,17 +43,18 @@ public class SettingFragment extends Fragment implements CompoundButton.OnChecke
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // might need to change this ?
+        Log.i(TAG, "onCreateView: Called");
         return inflater.inflate(R.layout.setting_layout, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.i(TAG, "onActivityCreated: Called");
+        coordinator_container = getActivity().findViewById(R.id.coordinator_container);
         darkModeSwitch = getActivity().findViewById(R.id.dark_mode_switch);
         currenciesSpinner = getActivity().findViewById(R.id.currency_spinner);
-        coordinator_container = getActivity().findViewById(R.id.coordinator_container_root);
-        currenciesSpinner.setOnItemSelectedListener(this);
-        darkModeSwitch.setOnCheckedChangeListener(this);
+
         // set the sharedPreferences
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
@@ -67,16 +68,27 @@ public class SettingFragment extends Fragment implements CompoundButton.OnChecke
         charSequenceArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         currenciesSpinner.setAdapter(charSequenceArrayAdapter);
 
+
         // TODO: get the currenct saved display value
         String savedDisplayCurrency = sharedPreferences.getString("DISPLAY_CURRENCY", "USD");
         currenciesSpinner.setSelection(charSequenceArrayAdapter.getPosition(savedDisplayCurrency));
+
+        // Set the listeners on the components
+        currenciesSpinner.setOnItemSelectedListener(this);
+        darkModeSwitch.setOnCheckedChangeListener(this);
+
+        savedChangedSnackbar = Snackbar.make(getActivity().findViewById(R.id.coordinator_container), "Your changed has been saved!", Snackbar.LENGTH_SHORT);
+        snackbar = Snackbar.make(getActivity().findViewById(R.id.coordinator_container), "Changes will take effect after restart!", Snackbar.LENGTH_LONG);
+
+        /*************************************************************************/
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate: Called");
+
         getActivity().setTitle(getString(R.string.setting_text));
-        snackbar = Snackbar.make(getActivity().findViewById(R.id.coordinator_container), "Changes will take effect after restart!", Snackbar.LENGTH_LONG);
 
         if (!this.checkInternetConnection()) {
             // TODO: show a snackbar
@@ -92,7 +104,6 @@ public class SettingFragment extends Fragment implements CompoundButton.OnChecke
             });
             snackbar.show();
         }
-
     }
 
     public static SettingFragment newInstance(String param1, String param2) {
@@ -142,7 +153,7 @@ public class SettingFragment extends Fragment implements CompoundButton.OnChecke
         // display the value selected by the user
         String selectedItem = charSequenceArrayAdapter.getItem(i).toString();
         sharedPreferences.edit().putString("DISPLAY_CURRENCY", selectedItem).apply();
-        snackbar.show();
+        savedChangedSnackbar.show();
     }
 
     @Override

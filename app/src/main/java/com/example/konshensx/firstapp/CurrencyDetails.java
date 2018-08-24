@@ -1,7 +1,9 @@
 package com.example.konshensx.firstapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,6 +21,8 @@ import java.math.BigDecimal;
 public class CurrencyDetails extends Fragment implements OnTaskCompleted {
 
     private String jsonResponse;
+    private String displayCurrency;
+
     TextView nameDetailsHolderView;
     TextView nameHolder;
     TextView rankHolder;
@@ -62,6 +66,9 @@ public class CurrencyDetails extends Fragment implements OnTaskCompleted {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // TODO: get the display currency from the sharedPrefernces
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        displayCurrency = sharedPreferences.getString("DISPLAY_CURRENCY", "USD");
         // TODO : remove this line (useless)
 //        setContentView(R.layout.activity_currency_details);
 
@@ -75,7 +82,7 @@ public class CurrencyDetails extends Fragment implements OnTaskCompleted {
         int message = intent.getIntExtra(Adapter.EXTRA_MESSAGE, 0);
         */
         // https://api.coinmarketcap.com/v2/ticker/1/
-        String ajaxUrl = "https://api.coinmarketcap.com/v2/ticker/" + getArguments().getInt("currency_id");
+        String ajaxUrl = "https://api.coinmarketcap.com/v2/ticker/" + getArguments().getInt("currency_id") + "/?convert=" + displayCurrency;
         new Fetcher(this).execute(ajaxUrl);
 
     }
@@ -107,7 +114,7 @@ public class CurrencyDetails extends Fragment implements OnTaskCompleted {
             }
 
             JSONObject quotesData = currencyObject.getJSONObject("quotes");
-            JSONObject usdData = quotesData.getJSONObject("USD");
+            JSONObject usdData = quotesData.getJSONObject(displayCurrency);
 
             double price = usdData.getDouble("price");
             BigDecimal volume24 = new BigDecimal(usdData.getDouble("volume_24h"));
@@ -126,10 +133,10 @@ public class CurrencyDetails extends Fragment implements OnTaskCompleted {
             // in here i have to format the string because passing the rank which is an int will crash the app
             // TODO: maybe put this in a string resource instead of just this, for reusability
             rankHolder.setText(String.format("%d", rank));
-            priceHolder.setText(String.format("%,.0f USD", price));
-            marketCapView.setText(String.format("%,.0f $", marketCap));
-            volumeView.setText(String.format("%,.0f $", volume24));
-            totalSupplyView.setText(String.format("%,.0f $", totalSupply));
+            priceHolder.setText(String.format("%,.0f %s", price, displayCurrency));
+            marketCapView.setText(String.format("%,.0f %s", marketCap, displayCurrency));
+            volumeView.setText(String.format("%,.0f %s", volume24, displayCurrency));
+            totalSupplyView.setText(String.format("%,.0f %s", totalSupply, displayCurrency));
             circulatingSupplyView.setText(String.format("%,.0f %s", circulatingSupply, symbol));
 
             getActivity().setTitle(String.format("%s Details", name));

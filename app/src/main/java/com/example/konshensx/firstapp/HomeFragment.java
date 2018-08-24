@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -113,6 +114,11 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
      */
     @Override
     public void onTaskCompleted(String result, int statusCode) {
+        if (statusCode == 429) {
+            // TODO: display a snackbar to let me know of the error
+            Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.coordinator_container), "Too many request Exception, try again later: " +statusCode, Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
         if (result != null)
         {
             this.jsonResponse = result;
@@ -221,7 +227,7 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
         // call loadNextSetOfDataFromAPI, which will call Fetcher Again, which will call loadNextSetOfDataFromAPI which will call ......
         // you get the idea, so i need another work around, to get the next set of data
         // TODO: this has to change to something more dynamic, doing this currently yo avoid RATE_LIMIT problem
-        if (this.numberOfcalls <= 30) {
+        if (this.numberOfcalls <= 10) {
             Log.i(TAG, "loadNextSetOfDataFromAPI: Fetcher was called, start_index: " + START_INDEX);
             new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?start="+ START_INDEX +"&limit=" + LIMIT + "&sort=rank");
         }
