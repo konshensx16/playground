@@ -113,13 +113,27 @@ else instead of shadow and be done with this, or atleast just ignore it and focu
 
 ☐ SettingFragment:
     if i can make the night/light mode work just during the life of the app that'd be more than enought for now
-    ☐ Add a card for every option of the options
+    ✔ Add a card for every option of the options @done (8/24/2018, 11:35:37 AM)
     ✔ Get rid of the accent color of the text , use primary text color instead @done (8/23/2018, 12:42:30 PM)
-    ☐ Handle the switching between light and dark mode
-        ☐ setDefaultNightMode is not setting the state, need to check where the value is being stored
-        ☐ Fragments not destroyed when calling Activity.recreate(): 
+    ✔ Handle the switching between light and dark mode @done (8/24/2018, 11:35:39 AM)
+        ✔ setDefaultNightMode is not setting the state, need to check where the value is being stored @done (8/24/2018, 11:35:45 AM)
+        ✘ Fragments not destroyed when calling Activity.recreate(): @cancelled (8/24/2018, 3:13:39 PM)
             https://stackoverflow.com/questions/26849905/fragments-not-destroyed-when-recreate-activity
-        ☐ I might need to incude a TAG with each fragment being created (tag will be used later for search and destroy)
+        ✘ I might need to incude a TAG with each fragment being created (tag will be used later for search and destroy) @cancelled (8/24/2018, 3:13:41 PM)
+    ✔ Handle the change on the spinner options @done (8/24/2018, 11:49:16 AM)
+    ✔ Save the current selected display currency in sharedPreferences @done (8/24/2018, 11:49:42 AM)
+    ✔ Display a snackbar when changing the display currency successfully @done (8/24/2018, 3:13:32 PM)
+    ✔ Load the preference in MainActivity and use the value in the API @done (8/24/2018, 3:24:32 PM)
+         ✔ The result from the API is a little bit unexpected, instead of the USD being converted to EURO, you get both USD and EURO @done (8/24/2018, 3:13:53 PM)
+         ✔ this means i need to change the parsing to include the EUR (second display value in the process) @done (8/24/2018, 3:24:23 PM)
+            ✔ HomeFragment first @done (8/24/2018, 3:24:19 PM)
+                ✔ Change the API to include teh display currency @done (8/24/2018, 3:17:15 PM)
+                ✔ Construct the string first then pass it the execute method @done (8/24/2018, 3:17:16 PM)
+    ✔ Might need to create a singleton to fetch the value at each fragment without rewriting the entire code @done (8/24/2018, 12:59:24 PM)
+    ☐ Change the display currency in the view as well (textViews)
+    ✔ Load the display currency in the settings fragment @done (8/24/2018, 3:24:15 PM)
+    ☐ Cards are not adapting to light and dark mode
+
 
 ✔ CurrencyDetailFragment: @done (8/23/2018, 4:47:23 PM)
     ✔ Create the light and dark version of the backgorund @done (8/23/2018, 3:03:18 PM)

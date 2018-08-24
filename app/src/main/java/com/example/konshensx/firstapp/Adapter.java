@@ -24,11 +24,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
 
     private List<Currency> mData;
     private FragmentManager fragmentManager;
+    private String displayCurrency;
 
-    public Adapter(Context context, List<Currency> mData, FragmentManager fragmentManager) {
+    public Adapter(Context context, List<Currency> mData, FragmentManager fragmentManager, String displayCurrency) {
         this.myContext = context;
         this.mData = mData;
         this.fragmentManager = fragmentManager;
+        this.displayCurrency = displayCurrency;
     }
 
     /**
@@ -57,7 +59,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     public void onBindViewHolder(@NonNull myViewHolder myViewHolder, final int i) {
         myViewHolder.symbol.setText(mData.get(i).getSymbol());
         myViewHolder.name.setText(mData.get(i).getName());
-        myViewHolder.price.setText(String.format("%,f $", mData.get(i).getQuotes().getPrice()));
+
+        myViewHolder.price.setText(String.format("%,f %s", mData.get(i).getQuotes().getPrice(), displayCurrency));
         if (mData.get(i).getQuotes().getPercentChange1H() > 0)
         {
             myViewHolder.change.setTextColor(Color.parseColor("#3AD084"));

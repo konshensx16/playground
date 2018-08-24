@@ -1,9 +1,11 @@
 package com.example.konshensx.firstapp;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -31,7 +33,10 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
     private static final String TAG = "HomeFragment";
     private int numberOfcalls;
     private String jsonResponse;
+    private String displayCurrency;
     private List<Currency> list;
+
+    SharedPreferences sharedPreferences;
     RecyclerView recyclerView;
     Adapter adapter;
     LinearLayoutManager linearLayoutManager;
@@ -59,7 +64,6 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         // trying to see if this is what's causing the slow starting of the fragment and the 429 status code (rate limit)
         super.onActivityCreated(savedInstanceState);
-
         recyclerView = getActivity().findViewById(R.id.rv_list);
     }
 
@@ -70,9 +74,12 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
             getActivity().setTitle("Vertex Tracker");
             linearLayoutManager = new LinearLayoutManager(getContext());
             this.list = new ArrayList<>();
-            adapter = new Adapter(getContext(), this.list, getActivity().getSupportFragmentManager());
-
+            sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+            displayCurrency = sharedPreferences.getString("DISPLAY_CURRENCY", "USD");
+            adapter = new Adapter(getContext(), this.list, getActivity().getSupportFragmentManager(), displayCurrency);
             // not connected to the internet, display snackbar to the user
+            final String link = "https://api.coinmarketcap.com/v2/ticker/?convert="+displayCurrency+"&limit=10&sort=rank";
+
             if (!this.checkInternetConnection()) {
                 final Snackbar snackbar = Snackbar.make(getActivity().findViewById(R.id.coordinator_container), "No internet connection", Snackbar.LENGTH_INDEFINITE);
                 snackbar.setAction("Retry", new View.OnClickListener() {
@@ -85,13 +92,14 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
                             // or maybe i should dismiss the snackbar to null it ??
                             snackbar.show();
                         } else {
-                            new Fetcher(new HomeFragment()).execute("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank");
+                            new Fetcher(new HomeFragment()).execute(link);
                         }
                     }
                 });
                 snackbar.show();
             } else {
-                new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank");
+                new Fetcher(this).execute(link);
+//                new Fetcher(this).execute("https://api.coinmarketcap.com/v2/ticker/?limit=10&sort=rank");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,7 +149,7 @@ public class HomeFragment extends Fragment implements OnTaskCompleted {
                 }
 
                 JSONObject quotesData = currencyObject.getJSONObject("quotes");
-                JSONObject usdData = quotesData.getJSONObject("USD");
+                JSONObject usdData = quotesData.getJSONObject(displayCurrency);
 
                 double price = usdData.getDouble("price");
                 BigDecimal volume24 = new BigDecimal(0.0);

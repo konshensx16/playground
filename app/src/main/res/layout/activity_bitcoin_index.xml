@@ -29,15 +29,15 @@
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.BottomNavigationView
-    android:id="@+id/navigation"
-    android:layout_width="match_parent"
-    android:layout_height="56dp"
-    android:layout_gravity="bottom"
-    android:background="?android:attr/windowBackground"
-    android:foreground="?attr/selectableItemBackground"
-    app:itemBackground="?attr/primaryBackgroundColor"
-    app:itemIconTint="?attr/accentColor"
-    app:itemTextColor="?attr/accentColor"
-    app:menu="@menu/navigation" />
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:background="?android:attr/windowBackground"
+        android:foreground="?attr/selectableItemBackground"
+        app:itemBackground="?attr/primaryBackgroundColor"
+        app:itemIconTint="?attr/accentColor"
+        app:itemTextColor="?attr/accentColor"
+        app:menu="@menu/navigation" />
 
 </android.support.design.widget.CoordinatorLayout>

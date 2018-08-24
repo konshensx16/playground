@@ -43,6 +43,11 @@ public class BitcoinIndex extends AppCompatActivity {
         }
 
         super.onCreate(savedInstanceState);
+        // TODO: get the display currency from sharedPreferences
+        String displayCurrency = sharedPreferences.getString("DISPLAY_CURRENCY", "USD");
+
+        Toast.makeText(this, "DISPLAY_CURRENCY:" + displayCurrency, Toast.LENGTH_LONG);
+
         try {
             // log the current state at launch
             // MODE_NIGHT_NO = 1;

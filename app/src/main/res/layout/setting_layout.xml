@@ -1,38 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:orientation="vertical">
 
-
-        <LinearLayout android:layout_height="match_parent"
+        <android.support.v7.widget.CardView
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="24dp">
+            android:elevation="1dp"
+            android:translationZ="1dp"
+            android:layout_margin="16dp"
+            app:cardBackgroundColor="?attr/primaryBackgroundColor"
+            app:contentPaddingTop="16dp"
+            app:contentPaddingBottom="16dp"
+            app:cardCornerRadius="5dp"
+            >
+            <LinearLayout android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:textColor="?attr/primaryTextColor"
-                android:text="@string/setting_dark_mode" />
+                <TextView
+                    android:id="@+id/night_mode_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:textColor="?attr/primaryTextColor"
+                    android:text="@string/setting_dark_mode" />
 
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/dark_mode_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:checked="false"
-                android:textOff="OFF"
-                android:textOn="ON"/>
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/dark_mode_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:checked="false"
+                    android:textOff="OFF"
+                    android:textOn="ON"/>
 
-        </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <!-- card for currency used to display prices, USD vs EURO-->
+        <android.support.v7.widget.CardView
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:elevation="1dp"
+            android:translationZ="1dp"
+            android:layout_margin="16dp"
+            app:contentPaddingTop="16dp"
+            app:contentPaddingBottom="16dp"
+            app:cardCornerRadius="5dp"
+            app:cardBackgroundColor="?attr/primaryBackgroundColor"
+            >
+            <LinearLayout android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/display_currency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="@string/currency_display_title"
+                    android:textColor="?attr/primaryTextColor" />
+
+                <Spinner
+                    android:id="@+id/currency_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    />
+
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
 
     </LinearLayout>
